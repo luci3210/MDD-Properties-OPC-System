@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\mdd\dashboard\UserController;
+use App\Http\Controllers\mdd\ppauth\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,27 @@ Route::middleware([
     })->name('dashboard');
 });
 
+// ----------------------- private_auth --------------------------------
+
+Route::controller(AuthController::class)->group(function () {
+
+    Route::get('mdd-properties/js/register','register')->name('private_register');
+    Route::post('mdd-properties/js/register_submit','register_submit')->name('private_register.submit');
+
+});
+
+
 Route::prefix('mdd-properties-opc/dashboard/')->group(function(){
+    Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
+        ->controller(UserController::class)
+            ->group(function() {
+
+                Route::get('index','index')->name('user.index');
+
+    });
+});
+
+Route::prefix('mdd/dashboard/jsx/manage-department')->group(function(){
     Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
         ->controller(UserController::class)
             ->group(function() {

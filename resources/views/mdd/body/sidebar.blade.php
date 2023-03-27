@@ -6,8 +6,8 @@
                     </div>
                     <div class="nk-sidebar-brand">
                         <a href="html/index.html" class="logo-link nk-sidebar-logo">
-                            <img class="logo-light logo-img" src="./images/logo.png" srcset="./images/logo2x.png 2x" alt="logo">
-                            <img class="logo-dark logo-img" src="./images/logo-dark.png" srcset="./images/logo-dark2x.png 2x" alt="logo-dark">
+                            <img class="logo-light logo-img" src="{{ url('mdd/assets/images/logo.png') }}" srcset="./images/logo2x.png 2x" alt="logo">
+                            <img class="logo-dark logo-img" src="{{ url('mdd/assets/images/logo-dark.png') }}" srcset="{{ url('mdd/assets/images/logo-dark2x.png 2x') }}" alt="logo-dark">
                         </a>
                     </div>
                 </div><!-- .nk-sidebar-element -->
@@ -15,36 +15,25 @@
                     <div class="nk-sidebar-content">
                         <div class="nk-sidebar-menu" data-simplebar>
                             <ul class="nk-menu">
-                                <li class="nk-menu-heading">
-                                    <h6 class="overline-title text-primary-alt">Use-Case Preview</h6>
-                                </li><!-- .nk-menu-item -->
-                                <li class="nk-menu-item">
-                                    <a href="html/crm/index.html" class="nk-menu-link">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-user-list"></em></span>
-                                        <span class="nk-menu-text">CRM Panel</span><span class="nk-menu-badge">HOT</span>
-                                    </a>
-                                </li><!-- .nk-menu-item -->
-                                <li class="nk-menu-item">
-                                    <a href="html/hotel/index.html" class="nk-menu-link">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-building"></em></span>
-                                        <span class="nk-menu-text">Hotel Management</span><span class="nk-menu-badge">HOT</span>
-                                    </a>
-                                </li><!-- .nk-menu-item -->
+                               
                                 <li class="nk-menu-heading">
                                     <h6 class="overline-title text-primary-alt">Dashboards</h6>
-                                </li><!-- .nk-menu-item -->
+                                </li>
+
                                 <li class="nk-menu-item">
                                     <a href="html/index.html" class="nk-menu-link">
                                         <span class="nk-menu-icon"><em class="icon ni ni-dashlite"></em></span>
-                                        <span class="nk-menu-text">Default Dashboard</span>
+                                        <span class="nk-menu-text">Manage User</span>
                                     </a>
-                                </li><!-- .nk-menu-item -->
+                                </li>
+
                                 <li class="nk-menu-item">
                                     <a href="html/index-crypto.html" class="nk-menu-link">
                                         <span class="nk-menu-icon"><em class="icon ni ni-bitcoin-cash"></em></span>
-                                        <span class="nk-menu-text">Crypto Dashboard</span>
+                                        <span class="nk-menu-text">Manage Department</span>
                                     </a>
-                                </li><!-- .nk-menu-item -->
+                                </li>
+
                                 <li class="nk-menu-item">
                                     <a href="html/index-analytics.html" class="nk-menu-link">
                                         <span class="nk-menu-icon"><em class="icon ni ni-growth"></em></span>
