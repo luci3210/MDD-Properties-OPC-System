@@ -125,17 +125,12 @@
 <div class="nk-tb-col nk-tb-col-tools">
     <ul class="nk-tb-actions gx-1">
         <li>
-            <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Details" data-bs-original-title="Details">
-                <em class="icon ni ni-eye-fill"></em>
+            <a href="{{ route('mu.request-account-edit',$details->id) }}" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Send Email" data-bs-original-title="Update">
+                <em class="icon ni ni-edit-fill"></em>
             </a>
         </li>
         <li>
-            <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Send Email" data-bs-original-title="Send Email">
-                <em class="icon ni ni-mail-fill"></em>
-            </a>
-        </li>
-        <li>
-            <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Suspend" data-bs-original-title="Suspend">
+            <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Suspend" data-bs-original-title="Delete">
                 <em class="icon ni ni-cross-fill-c"></em>
             </a>
         </li>
