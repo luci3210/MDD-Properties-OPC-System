@@ -22,9 +22,21 @@
 
                                 <li class="nk-menu-item">
                                     <a href="html/index.html" class="nk-menu-link">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-dashlite"></em></span>
+                                        <a href="#" class="nk-menu-link nk-menu-toggle">
+                                        <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
                                         <span class="nk-menu-text">Manage User</span>
                                     </a>
+                                    </a>
+
+                                    <ul class="nk-menu-sub">
+                                        <li class="nk-menu-item">
+                                            <a href="{{ route('mu.request-account-index') }}" class="nk-menu-link"><span class="nk-menu-text">Request Account</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="html/project-list.html" class="nk-menu-link"><span class="nk-menu-text">Project List</span></a>
+                                        </li>
+                                    </ul>
+
                                 </li>
 
                                 <li class="nk-menu-item">

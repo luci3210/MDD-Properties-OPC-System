@@ -42,7 +42,7 @@ class AuthController extends Controller
 
         $notification = array(
             'success' => 'Account successfully created. Please wait while our Admin checking on it.',
-            'error' => 'Please check your input carefully.'
+            // 'error' => 'Please check your input carefully.'
         );
 
         return redirect()->route('private_register')->with($notification);
