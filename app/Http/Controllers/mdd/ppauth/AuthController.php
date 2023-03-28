@@ -5,6 +5,7 @@ namespace App\Http\Controllers\mdd\ppauth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\mdd\RegisterModel;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -18,7 +19,7 @@ class AuthController extends Controller
             'fullname' => 'required|max:50',
             'department' => 'required|numeric',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:32|max:64'];
+            'password' => 'required|min:8|max:20'];
 
         $error = [
             'required' => '* Enter your :attribute', 
@@ -27,6 +28,30 @@ class AuthController extends Controller
 
         $this->validate($request, $input, $error);
 
-        return "sdd";
+        try {
+
+        $insert = RegisterModel::firstOrCreate(
+            [
+                'name'=> $request->fullname,
+                'department' => $request->department,
+                'email' => $request->email,
+                'password' =>  Hash::make($request->password),
+                'status' => 1,
+                ]
+            );
+
+        $notification = array(
+            'success' => 'Account successfully created. Please wait while our Admin checking on it.',
+            'error' => 'Please check your input carefully.'
+        );
+
+        return redirect()->route('private_register')->with($notification);
+
+        } catch (\Exception $e) {
+
+            return view('mdd.pages.error.404');
+
+        }
+
     }
 }

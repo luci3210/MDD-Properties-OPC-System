@@ -14,12 +14,25 @@
                                         <img class="logo-dark logo-img logo-img-lg" src="{{ url('mdd/assets/images/logo-dark.png') }}" srcset="{{ url('mdd/assets/images/logo-dark2x.png 2x') }}" alt="logo-dark">
                                     </a>
                                 </div>
-                                <div class="nk-block-head">
-                                    <div class="nk-block-head-content">
-                                        <h5 class="nk-block-title">Create New Account</h5>
-                                       
-                                    </div>
-                                </div>
+<div class="nk-block-head">
+    <div class="nk-block-head-content">
+        <h5 class="nk-block-title">Create New Account</h5>
+
+
+@if ($message = Session::get('success'))
+    <div class="alert alert-success alert-icon">
+        <em class="icon ni ni-check-circle"></em> <strong>Success</strong>. {{ $message }}
+    </div>
+ @endif 
+
+ @if ($message = Session::get('error'))
+    <div class="alert alert-danger alert-icon">
+        <em class="icon ni ni-cross-circle"></em> <strong>Failed</strong>. {{ $message }}
+    </div>
+ @endif 
+
+    </div>
+</div>
 
 <form action="{{ route('private_register.submit') }}" method="post">
     @csrf
@@ -28,9 +41,10 @@
                 @error('fullname')                
                     <span id="fv-sex-error" class="validate_input">{{ $message }}</span>
                  @enderror
+
             </label>
             <div class="form-control-wrap">
-                <input type="text" class="form-control form-control-lg" name="fullname" value="" placeholder="Enter your full name">
+                <input type="text" class="form-control form-control-lg @error('fullname') is-invalid @enderror" name="fullname" value="" placeholder="Enter your full name">
             </div>
         </div>
 
@@ -42,12 +56,12 @@
     @enderror
 </label>
 <div class="form-control-wrap ">
-    <select class="form-select form-select-lg js-select2 select2-hidden-accessible valid" id="fva-topics" name="department" data-placeholder="Select department" data-select2-id="fva-topics" tabindex="-1" aria-hidden="true" aria-invalid="false">
-        <option label="empty" value="" data-select2-id="4"></option>
-        <option value="fva-gq" data-select2-id="8">Finance</option>
-        <option value="fva-tq" data-select2-id="9">Casher</option>
-        <option value="fva-ab" data-select2-id="10">Broker</option>
-        <option value="fva-ab" data-select2-id="11">Agent</option>
+    <select class="form-select form-select-lg js-select2 select2-hidden-accessible valid @error('department') is-invalid @enderror" id="fva-topics" name="department" data-placeholder="Select department" data-select2-id="fva-topics" tabindex="-1" aria-hidden="true" aria-invalid="false">
+        <option label="empty" value="" data-select2-id=""></option>
+        <option value="1" data-select2-id="8">Finance</option>
+        <option value="2" data-select2-id="9">Casher</option>
+        <option value="3" data-select2-id="10">Broker</option>
+        <option value="4" data-select2-id="11">Agent</option>
     </select>
 </div>
 </div>
@@ -59,7 +73,7 @@
         @enderror
     </label>
     <div class="form-control-wrap">
-        <input type="text" class="form-control form-control-lg" name="email" placeholder="Enter your email address or username">
+        <input type="text" class="form-control form-control-lg @error('email') is-invalid @enderror" name="email" placeholder="Enter your email address or username">
     </div>
 </div>
 <div class="form-group">
@@ -73,14 +87,15 @@
             <em class="passcode-icon icon-show icon ni ni-eye"></em>
             <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
         </a>
-        <input type="password" class="form-control form-control-lg" name="password" placeholder="Enter your password">
+        <input type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" placeholder="Enter your password">
     </div>
 </div>
 
 <div class="form-group">
     <div class="custom-control custom-control-xs custom-checkbox">
         <input type="checkbox" class="custom-control-input" id="checkbox">
-        <label class="custom-control-label" for="checkbox">I agree to Dashlite <a tabindex="-1" href="#">Privacy Policy</a> &amp; <a tabindex="-1" href="#"> Terms.</a></label>
+        <label class="custom-control-label" for="checkbox">I agree to MDD Properties <a tabindex="-1" href="#">Privacy Policy</a> &amp; <a tabindex="-1" href="#"> Terms.</a>
+        </label>
     </div>
 </div>
                                     <div class="form-group">
