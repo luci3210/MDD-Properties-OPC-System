@@ -36,7 +36,11 @@
 
 
 <div class="form-group">
-<label class="form-label" for="fva-topics">Department</label>
+<label class="form-label" for="fva-topics">Department
+     @error('department')                
+        <span id="fv-sex-error" class="validate_input">{{ $message }}</span>
+    @enderror
+</label>
 <div class="form-control-wrap ">
     <select class="form-select form-select-lg js-select2 select2-hidden-accessible valid" id="fva-topics" name="department" data-placeholder="Select department" data-select2-id="fva-topics" tabindex="-1" aria-hidden="true" aria-invalid="false">
         <option label="empty" value="" data-select2-id="4"></option>
@@ -49,13 +53,21 @@
 </div>
 
 <div class="form-group">
-    <label class="form-label" for="email">Email or Username</label>
+    <label class="form-label" for="email">Email or Username
+        @error('email')                
+        <span id="fv-sex-error" class="validate_input">{{ $message }}</span>
+        @enderror
+    </label>
     <div class="form-control-wrap">
         <input type="text" class="form-control form-control-lg" name="email" placeholder="Enter your email address or username">
     </div>
 </div>
 <div class="form-group">
-    <label class="form-label" for="password">Password</label>
+    <label class="form-label" for="password">Password
+        @error('password')                
+        <span id="fv-sex-error" class="validate_input">{{ $message }}</span>
+        @enderror
+    </label>
     <div class="form-control-wrap">
         <a tabindex="-1" href="#" class="form-icon form-icon-right passcode-switch lg" data-target="password">
             <em class="passcode-icon icon-show icon ni ni-eye"></em>
