@@ -62,8 +62,6 @@
                 </ul><!-- .btn-toolbar -->
             </div><!-- .toggle-content -->
         </div><!-- .toggle-wrap -->
-    </li><!-- li -->
-</ul><!-- .btn-toolbar -->
 </div><!-- .card-tools -->
 </div><!-- .card-title-group -->
 <div class="card-search search-wrap" data-search="search">
@@ -87,14 +85,16 @@
 </div>
 
 <div class="nk-tb-col"><span class="sub-text">No</span></div>
-<div class="nk-tb-col tb-col-sm"><span class="sub-text">Full Name</span></div>
+<div class="nk-tb-col tb-col-sm"><span class="sub-text"><strong>Full Name</strong></span></div>
 <div class="nk-tb-col tb-col-md"><span class="sub-text">Department</span></div>
 <div class="nk-tb-col tb-col-lg"><span class="sub-text">Email</span></div>
 <div class="nk-tb-col tb-col-lg"><span class="sub-text">Status</span></div>
-<div class="nk-tb-col"><span class="sub-text">Actions</span></div>
+<div class="nk-tb-col text-end"><span class="sub-text">Actions</span></div>
 </div><!-- .nk-tb-item -->
 <!-- .nk-tb-item -->
 
+
+@foreach($data as $details)
 
 <div class="nk-tb-item">
 <div class="nk-tb-col nk-tb-col-check">
@@ -107,17 +107,17 @@
     1
 </div>
 <div class="nk-tb-col tb-col-sm">
-    <span class="sub-text">olivia@apple.com</span>
+    <span class="sub-text">{{ $details->name }}</span>
 </div>
 <div class="nk-tb-col tb-col-md">
-    <span class="sub-text">+782 332-8328</span>
+    <span class="sub-text">Finance</span>
 </div>
 <div class="nk-tb-col tb-col-lg">
-    <span class="sub-text">Apple</span>
+    <span class="sub-text">{{ $details->email }}</span>
 </div>
 
 <div class="nk-tb-col tb-col-xxl">
-    <span class="sub-text">08 Dec 2021, 04:03 am</span>
+    <span class="sub-text">Active</span>
 </div>
 <div class="nk-tb-col tb-col-lg">
     <span class="tb-status text-success">Active</span>
@@ -143,7 +143,7 @@
 </div>
 </div>
 
-
+@endforeach
 
 <!-- .nk-tb-item -->
 </div><!-- .nk-tb-list -->
