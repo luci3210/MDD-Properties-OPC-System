@@ -72,6 +72,10 @@ Route::prefix('mdd-properties/dashboard/jsx/manage-department')->group(function(
             ->group(function() {
 
                 Route::get('index','index')->name('md.index');
+                Route::post('index','save')->name('md.submit');
+                Route::post('index','edit')->name('md.edit');
+                Route::post('index','update')->name('md.update');
+                Route::post('index','delete')->name('md.delete');
 
     });
 });

@@ -14,4 +14,22 @@ class departmentcontroller extends Controller
         return view('mdd.pages.dashboard.manage_department.index',compact('data'));
     }
 
+    public function save() {
+        return "sdsd";
+    }
+
+    public function edit() {
+        return "sdsd";
+    }
+
+    public function update() {
+        return "sdsd";
+    }
+
+    public function delete() {
+        return "sdsd";
+    }
+
+
+
 }
