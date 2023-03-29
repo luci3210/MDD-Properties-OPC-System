@@ -57,6 +57,7 @@ Route::prefix('mdd-properties/dashboard/jsx/manage-user')->group(function(){
 
                 Route::get('request-account-index','request_account')->name('mu.request-account-index');
                 Route::get('request-account-update/{id}','request_account_edit')->name('mu.request-account-edit');
+                Route::post('request-account-move/{id}','request_account_move')->name('mu.request-account-move');
 
     });
 });
