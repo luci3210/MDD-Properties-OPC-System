@@ -5,6 +5,7 @@ namespace App\Http\Controllers\mdd\dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\mdd\RegisterModel;
+use App\Models\mdd\UserDepatment;
 use App\Models\User;
 
 class manageusercontroller extends Controller
@@ -42,7 +43,7 @@ class manageusercontroller extends Controller
 
             if($data) {
 
-                User::firstOrCreate([
+                $get = User::firstOrCreate([
                     'name' => $data->name,
                     'email' => $data->email,
                     'password' => $data->password,
@@ -51,6 +52,12 @@ class manageusercontroller extends Controller
                  $notification = array(
                     'success' => 'Account successfully updated and please do advice to check the email to activate the account.',
                 );
+
+                UserDepatment::create([
+                    'user_id' => $get->id,
+                    'user_department_id' => $data->department,
+                    'atatus' => $data->status,
+                ]);
 
                 return redirect()->route('mu.request-account-index')->with($notification);
 
