@@ -16,35 +16,35 @@
                         <div class="nk-sidebar-menu" data-simplebar>
                             <ul class="nk-menu">
                                
-                                <li class="nk-menu-heading">
-                                    <h6 class="overline-title text-primary-alt">Dashboards</h6>
-                                </li>
+<li class="nk-menu-heading">
+    <h6 class="overline-title text-primary-alt">Dashboards</h6>
+</li>
 
-                                <li class="nk-menu-item">
-                                    <a href="html/index.html" class="nk-menu-link">
-                                        <a href="#" class="nk-menu-link nk-menu-toggle">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
-                                        <span class="nk-menu-text">Manage User</span>
-                                    </a>
-                                    </a>
+<li class="nk-menu-item">
+    <a href="html/index.html" class="nk-menu-link">
+        <a href="#" class="nk-menu-link nk-menu-toggle">
+            <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
+            <span class="nk-menu-text">Manage User</span>
+        </a>
+    </a>
 
-                                    <ul class="nk-menu-sub">
-                                        <li class="nk-menu-item">
-                                            <a href="{{ route('mu.request-account-index') }}" class="nk-menu-link"><span class="nk-menu-text">Request Account</span></a>
-                                        </li>
-                                        <li class="nk-menu-item">
-                                            <a href="html/project-list.html" class="nk-menu-link"><span class="nk-menu-text">Project List</span></a>
-                                        </li>
-                                    </ul>
+    <ul class="nk-menu-sub">
+        <li class="nk-menu-item">
+            <a href="{{ route('mu.request-account-index') }}" class="nk-menu-link"><span class="nk-menu-text">Request Account</span></a>
+        </li>
+        <li class="nk-menu-item">
+            <a href="html/project-list.html" class="nk-menu-link"><span class="nk-menu-text">User List</span></a>
+        </li>
+    </ul>
 
-                                </li>
+</li>
 
-                                <li class="nk-menu-item">
-                                    <a href="html/index-crypto.html" class="nk-menu-link">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-bitcoin-cash"></em></span>
-                                        <span class="nk-menu-text">Manage Department</span>
-                                    </a>
-                                </li>
+<li class="nk-menu-item">
+    <a href="{{ route('md.index') }}" class="nk-menu-link">
+        <span class="nk-menu-icon"><em class="icon ni ni-bitcoin-cash"></em></span>
+        <span class="nk-menu-text">Manage Department</span>
+    </a>
+</li>
 
                                 <li class="nk-menu-item">
                                     <a href="html/index-analytics.html" class="nk-menu-link">

@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\mdd\ppauth\AuthController;
 use App\Http\Controllers\mdd\dashboard\UserController;
 use App\Http\Controllers\mdd\dashboard\manageusercontroller;
-use App\Http\Controllers\mdd\ppauth\AuthController;
+use App\Http\Controllers\mdd\dashboard\departmentcontroller;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +52,7 @@ Route::prefix('mdd-properties-opc/dashboard/')->group(function(){
     });
 });
 
+// MANAGE USER
 Route::prefix('mdd-properties/dashboard/jsx/manage-user')->group(function(){
     Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
         ->controller(manageusercontroller::class)
@@ -62,12 +65,23 @@ Route::prefix('mdd-properties/dashboard/jsx/manage-user')->group(function(){
     });
 });
 
+// MANAGE DEPARTMENT
 Route::prefix('mdd-properties/dashboard/jsx/manage-department')->group(function(){
     Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
-        ->controller(UserController::class)
+        ->controller(departmentcontroller::class)
             ->group(function() {
 
-                Route::get('index','index')->name('user.index');
+                Route::get('index','index')->name('md.index');
 
     });
 });
+
+// Route::prefix('mdd-properties/dashboard/jsx/manage-department')->group(function(){
+//     Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
+//         ->controller(UserController::class)
+//             ->group(function() {
+
+//                 Route::get('index','index')->name('user.index');
+
+//     });
+// });
