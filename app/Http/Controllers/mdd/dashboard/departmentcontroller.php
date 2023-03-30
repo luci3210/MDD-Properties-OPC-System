@@ -14,8 +14,37 @@ class departmentcontroller extends Controller
         return view('mdd.pages.dashboard.manage_department.index',compact('data'));
     }
 
-    public function save() {
-        return "sdsd";
+    public function form_submit(Request $request) {
+            
+            $input = [
+            'department' => 'required|max:50',
+            'description' => 'required',
+            'icon' => 'required',
+            'status' => 'required|min:1|max:2'];
+
+            $error = ['required' => '* Enter your :attribute'];
+
+            $this->validate($request, $input, $error);
+
+        try {
+
+            Department::create([
+                'department' => $request->department,
+                    'description' => $request->description,
+                        'icon' => $request->icon,
+                            'status' => $request->status,
+                ]);
+
+             $notification = array(
+                'success' => "Information successfully save!",
+            );
+
+            return redirect()->route('manage-department-index')->with($notification);
+
+        } catch (\Exception $e) {
+
+             return view('mdd.pages.error.404');
+        }
     }
 
     public function edit() {

@@ -17,7 +17,14 @@
                             <ul class="nk-menu">
                                
 <li class="nk-menu-heading">
-    <h6 class="overline-title text-primary-alt">Dashboards</h6>
+    <h6 class="overline-title text-primary-alt">Admin Settings</h6>
+</li>
+
+<li class="nk-menu-item">
+    <a href="html/index-analytics.html" class="nk-menu-link">
+        <span class="nk-menu-icon"><em class="icon ni ni-growth"></em></span>
+        <span class="nk-menu-text">Analytics Dashboard</span>
+    </a>
 </li>
 
 <li class="nk-menu-item">
@@ -40,41 +47,30 @@
 </li>
 
 <li class="nk-menu-item">
-    <a href="{{ route('md.index') }}" class="nk-menu-link">
+    <a href="{{ route('manage-department-index') }}" class="nk-menu-link">
         <span class="nk-menu-icon"><em class="icon ni ni-bitcoin-cash"></em></span>
         <span class="nk-menu-text">Manage Department</span>
     </a>
 </li>
 
-                                <li class="nk-menu-item">
-                                    <a href="html/index-analytics.html" class="nk-menu-link">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-growth"></em></span>
-                                        <span class="nk-menu-text">Analytics Dashboard</span>
-                                    </a>
-                                </li><!-- .nk-menu-item -->
-                                <li class="nk-menu-item">
-                                    <a href="html/index-invest.html" class="nk-menu-link">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-coins"></em></span>
-                                        <span class="nk-menu-text">Invest Dashboard</span>
-                                    </a>
-                                </li><!-- .nk-menu-item -->
-                                <li class="nk-menu-heading">
-                                    <h6 class="overline-title text-primary-alt">Pre-Built Pages</h6>
-                                </li><!-- .nk-menu-heading -->
-                                <li class="nk-menu-item has-sub">
-                                    <a href="#" class="nk-menu-link nk-menu-toggle">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
-                                        <span class="nk-menu-text">Projects</span>
-                                    </a>
-                                    <ul class="nk-menu-sub">
-                                        <li class="nk-menu-item">
-                                            <a href="html/project-card.html" class="nk-menu-link"><span class="nk-menu-text">Project Cards</span></a>
-                                        </li>
-                                        <li class="nk-menu-item">
-                                            <a href="html/project-list.html" class="nk-menu-link"><span class="nk-menu-text">Project List</span></a>
-                                        </li>
-                                    </ul><!-- .nk-menu-sub -->
-                                </li><!-- .nk-menu-item -->
+
+<li class="nk-menu-heading">
+    <h6 class="overline-title text-primary-alt">Department</h6>
+</li><!-- .nk-menu-heading -->
+<li class="nk-menu-item has-sub">
+    <a href="#" class="nk-menu-link nk-menu-toggle">
+        <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
+        <span class="nk-menu-text">Projects</span>
+    </a>
+    <ul class="nk-menu-sub">
+        <li class="nk-menu-item">
+            <a href="html/project-card.html" class="nk-menu-link"><span class="nk-menu-text">Project Cards</span></a>
+        </li>
+        <li class="nk-menu-item">
+            <a href="html/project-list.html" class="nk-menu-link"><span class="nk-menu-text">Project List</span></a>
+        </li>
+    </ul><!-- .nk-menu-sub -->
+</li><!-- .nk-menu-item -->
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
                                         <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>
