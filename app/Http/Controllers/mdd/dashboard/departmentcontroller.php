@@ -10,7 +10,11 @@ class departmentcontroller extends Controller
 {
     public function index() {
 
-        $data = Department::all();
+        $data = Department::join('statuses','statuses.id','departments.status')
+            ->where(function($query) {
+                $query->from('departments');
+            })->get('departments.id AS id','departments.department AS department','departments.description AS description','departments.icon AS icon','statuses.name AS name');
+
         return view('mdd.pages.dashboard.manage_department.index',compact('data'));
     }
 

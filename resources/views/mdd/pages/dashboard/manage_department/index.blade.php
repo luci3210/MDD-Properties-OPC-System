@@ -201,7 +201,7 @@
             </td>
 
             <td class="tb-tnx-id">
-                <a href="#"><span>{{ $details->status }}</span></a>
+                <a href="#"><span>{{ $details->name }}</span></a>
             </td>
             
             <td class="tb-tnx-action">
