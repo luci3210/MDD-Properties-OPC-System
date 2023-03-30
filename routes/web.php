@@ -5,6 +5,7 @@ use App\Http\Controllers\mdd\ppauth\AuthController;
 use App\Http\Controllers\mdd\dashboard\UserController;
 use App\Http\Controllers\mdd\dashboard\manageusercontroller;
 use App\Http\Controllers\mdd\dashboard\departmentcontroller;
+use App\Http\Controllers\mdd\dashboard\statuscontroller;
 
 
 /*
@@ -76,6 +77,18 @@ Route::prefix('mdd-properties/dashboard/jsx/manage-department')->group(function(
                 // Route::post('index','edit')->name('md.edit');
                 // Route::post('index','update')->name('md.update');
                 // Route::post('index','delete')->name('md.delete');
+
+    });
+});
+
+// MANAGE STATUS
+Route::prefix('mdd-properties/dashboard/jsx/manage-status')->group(function(){
+    Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
+        ->controller(statuscontroller::class)
+            ->group(function() {
+
+                Route::get('index','index')->name('manage-status-index');
+                Route::post('submit','form_submit')->name('manage-status-submit');
 
     });
 });

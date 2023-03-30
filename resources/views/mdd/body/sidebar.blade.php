@@ -53,6 +53,13 @@
     </a>
 </li>
 
+<li class="nk-menu-item">
+    <a href="{{ route('manage-status-index') }}" class="nk-menu-link">
+        <span class="nk-menu-icon"><em class="icon ni ni-bitcoin-cash"></em></span>
+        <span class="nk-menu-text">Manage Status</span>
+    </a>
+</li>
+
 
 <li class="nk-menu-heading">
     <h6 class="overline-title text-primary-alt">Department</h6>
