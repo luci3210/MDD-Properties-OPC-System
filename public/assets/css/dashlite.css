@@ -13664,6 +13664,8 @@ a.alert:hover {
 }
 
 .alert-fill.alert-success {
+  margin-top: 10px;
+  margin-bottom: -18px;
   color: #fff;
   background: #1ee0ac;
 }

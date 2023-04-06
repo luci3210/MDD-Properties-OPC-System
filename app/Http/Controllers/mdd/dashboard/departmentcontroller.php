@@ -5,17 +5,19 @@ namespace App\Http\Controllers\mdd\dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\mdd\Department;
+use DB;
 
 class departmentcontroller extends Controller
 {
-    public function index() {
+    public function index($id='') {
 
-        $data = Department::join('statuses','statuses.id','departments.status')
-            ->where(function($query) {
-                $query->from('departments');
-            })->get('departments.id AS id','departments.department AS department','departments.description AS description','departments.icon AS icon','statuses.name AS name');
+        $data = DB::table('departments')
+            ->join('statuses', 'departments.status','=','statuses.id')->select('departments.*','statuses.name')->get();
 
-        return view('mdd.pages.dashboard.manage_department.index',compact('data'));
+        $data_find = DB::table('departments')
+            ->join('statuses', 'departments.status','=','statuses.id')->select('departments.*','statuses.name')->get();
+
+        return view('mdd.pages.dashboard.manage_department.index',compact('data','data_find'));
     }
 
     public function form_submit(Request $request) {

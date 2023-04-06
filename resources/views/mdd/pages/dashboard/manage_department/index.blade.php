@@ -1,5 +1,6 @@
 @extends('mdd.admin_master')
 @include('mdd.pages.dashboard.manage_department.department_form_modal')
+@include('mdd.pages.dashboard.manage_department.department_form_editmodal')
 
 @section('mdd')
 <div class="nk-content ">
@@ -185,23 +186,23 @@
     @foreach($data as $details)
         <tr class="tb-tnx-item">
             <td class="tb-tnx-id">
-                <a href="#"><span>1</span></a>
+                {{ $loop->index + 1 }}
             </td>
 
             <td class="tb-tnx-id">
-                <a href="#"><span>{{ $details->department }}</span></a>
+                {{ $details->department }}
             </td>
 
             <td class="tb-tnx-id">
-                <a href="#"><span>{{ $details->description }}</span></a>
+                {{ $details->description }}
             </td>
 
             <td class="tb-tnx-id">
-                <a href="#"><span>{{ $details->icon }}</span></a>
+                {{ $details->icon }}
             </td>
 
             <td class="tb-tnx-id">
-                <a href="#"><span>{{ $details->name }}</span></a>
+                {{ $details->name }}
             </td>
             
             <td class="tb-tnx-action">
@@ -209,7 +210,7 @@
                     <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
                         <ul class="link-list-plain">
-                            <li><a data-bs-toggle="modal" href="#edit-pay-method">Edit</a></li>
+                            <li><a data-bs-toggle="modal" href="#depform_edit">Edit</a></li>
                             <li><a href="#">Remove</a></li>
                         </ul>
                     </div>

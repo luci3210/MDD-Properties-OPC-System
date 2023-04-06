@@ -6,6 +6,9 @@ use App\Http\Controllers\mdd\dashboard\UserController;
 use App\Http\Controllers\mdd\dashboard\manageusercontroller;
 use App\Http\Controllers\mdd\dashboard\departmentcontroller;
 use App\Http\Controllers\mdd\dashboard\statuscontroller;
+use App\Http\Livewire\Manage\ManageStatus;
+use App\Http\Livewire\Manage\ManageComponentStatus;
+
 
 
 /*
@@ -22,6 +25,8 @@ use App\Http\Controllers\mdd\dashboard\statuscontroller;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route::get('/stat', ManageStatus::class);
 
 Route::middleware([
     'auth:sanctum',
@@ -82,16 +87,41 @@ Route::prefix('mdd-properties/dashboard/jsx/manage-department')->group(function(
 });
 
 // MANAGE STATUS
-Route::prefix('mdd-properties/dashboard/jsx/manage-status')->group(function(){
+Route::prefix('mdd-properties/dashboard/jsx/managestatus')->group(function(){
     Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
         ->controller(statuscontroller::class)
             ->group(function() {
 
                 Route::get('index','index')->name('manage-status-index');
-                Route::post('submit','form_submit')->name('manage-status-submit');
+                Route::get('status-form-edit/{id}','status_form_edit')->name('status-form-edit');
+                Route::post('status-form-create','status_form_create')->name('status-form-create');
+                Route::post('status-form-update','status_form_update')->name('status-form-update');
+                Route::post('status-form-delete','status_form_delete')->name('status-form-delete');
 
     });
 });
+
+// LIVEWIRE MANAGE STATUS
+Route::get('/stat',ManageStatus::class)->middleware(['auth:sanctum',config('jetstream.auth_session'),'verified']);
+Route::get('manage_component_status',ManageComponentStatus::class);
+
+// Route::prefix('mdd-properties/dashboard/jsx/managestatus')->group(function(){
+//     Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
+//         ->controller(ManageStatus::class)
+//    ->group(function() {
+
+//                 Route::get('stat');
+
+//     });
+
+// });
+
+// Route::controller(ManageStatus::class)->group(function () {
+
+//     Route::get('stat');
+
+// });
+
 
 // Route::prefix('mdd-properties/dashboard/jsx/manage-department')->group(function(){
 //     Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
