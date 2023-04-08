@@ -1,177 +1,307 @@
 @extends('mdd.admin_master')
 @section('mdd')
+
 <div class="nk-content ">
-                    <div class="container-fluid">
-                        <div class="nk-content-inner">
-                            <div class="nk-content-body">
-                                <div class="nk-block-head nk-block-head-sm">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+    
 
-                                    <div class="nk-block-between">
-                                        <div class="nk-block-head-content">
-                                            <h3 class="nk-block-title page-title">Request Account</h3>
-                                            <div class="nk-block-des text-soft">
-                                                <p>You have total 1,261 users.</p>
-                                            </div>
-                                        </div><!-- .nk-block-head-content -->
-                                        <div class="nk-block-head-content">
-                                            
-                                        </div><!-- .nk-block-head-content -->
-                                    </div>
-@if ($message = Session::get('success'))
-    <div class="alert alert-success alert-icon">
-    <em class="icon ni ni-check-circle"></em> <strong>Success</strong>. {{ $message }}
+<div class="nk-block-head nk-block-head-sm">
+    <div class="nk-block-between g-3">
+        <div class="nk-block-head-content">
+            <h3 class="nk-block-title page-title">Manage User</h3>
+            <div class="nk-block-des text-soft">
+                <p><strong>Request account</strong> <span style="color:red;font-style: italic;">(For Verification)</span></p>
+            </div>
+        </div>
     </div>
-@endif 
-                                </div><!-- .nk-block-head -->
+
+    @if ($message = Session::get('success'))
+        <div class="alert alert-fill alert-success alert-icon">
+            <em class="icon ni ni-check-circle"></em> <strong>Success</strong>. {{ $message }}
+        </div>
+    @endif 
+
+    @if ($errors->any())
+        <div class="alert alert-fill alert-danger alert-icon">
+            <em class="icon ni ni-check-circle"></em> <strong>Whoops!</strong>  There were some problems with your input.
+        </div>
+    @endif
+</div>
+
 <div class="nk-block">
-<div class="card card-bordered card-stretch">
-<div class="card-inner-group">
-<div class="card-inner position-relative card-tools-toggle">
-<div class="card-title-group">
-<div class="card-tools">
+    <div class="card card-bordered card-stretch">
+        <div class="container-fluid">
+            <div style="margin-top:10px; margin-left: 5px; margin-right: 5px;">
 
-</div><!-- .card-tools -->
-<div class="card-tools me-n1">
-<ul class="btn-toolbar gx-1">
-    <li>
-        <a href="#" class="btn btn-icon search-toggle toggle-search" data-target="search"><em class="icon ni ni-search"></em></a>
-    </li><!-- li -->
-    <li class="btn-toolbar-sep"></li><!-- li -->
-    <li>
-        <div class="toggle-wrap">
-            <a href="#" class="btn btn-icon btn-trigger toggle" data-target="cardTools"><em class="icon ni ni-menu-right"></em></a>
-            <div class="toggle-content" data-content="cardTools">
-                <ul class="btn-toolbar gx-1">
-                    <li class="toggle-close">
-                        <a href="#" class="btn btn-icon btn-trigger toggle" data-target="cardTools"><em class="icon ni ni-arrow-left"></em></a>
-                    </li><!-- li -->
-                    
-                        <div class="dropdown">
-                            <a href="#" class="btn btn-trigger btn-icon dropdown-toggle" data-bs-toggle="dropdown">
-                                <em class="icon ni ni-setting"></em>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-xs dropdown-menu-end">
-                                <ul class="link-check">
-                                    <li><span>Show</span></li>
-                                    <li class="active"><a href="#">10</a></li>
-                                    <li><a href="#">20</a></li>
-                                    <li><a href="#">50</a></li>
-                                </ul>
-                                <ul class="link-check">
-                                    <li><span>Order</span></li>
-                                    <li class="active"><a href="#">DESC</a></li>
-                                    <li><a href="#">ASC</a></li>
-                                </ul>
-                            </div>
-                        </div><!-- .dropdown -->
-                    </li><!-- li -->
-                </ul><!-- .btn-toolbar -->
-            </div><!-- .toggle-content -->
-        </div><!-- .toggle-wrap -->
-</div><!-- .card-tools -->
-</div><!-- .card-title-group -->
-<div class="card-search search-wrap" data-search="search">
-<div class="card-body">
-<div class="search-content">
-    <a href="#" class="search-back btn btn-icon toggle-search" data-target="search"><em class="icon ni ni-arrow-left"></em></a>
-    <input type="text" class="form-control border-transparent form-focus-none" placeholder="Search by name">
-    <button class="search-submit btn btn-icon"><em class="icon ni ni-search"></em></button>
-</div>
-</div>
-</div><!-- .card-search -->
-</div><!-- .card-inner -->
-<div class="card-inner p-0">
-<div class="nk-tb-list nk-tb-ulist">
-<div class="nk-tb-item nk-tb-head">
-<div class="nk-tb-col nk-tb-col-check">
-    <div class="custom-control custom-control-sm custom-checkbox notext">
-        <input type="checkbox" class="custom-control-input" id="cid">
-        <label class="custom-control-label" for="cid"></label>
-    </div>
-</div>
+<table class="table table-tranx">
+    <thead>
+        <tr class="tb-tnx-head">
+            <th class="tb-tnx-id"><span class="">#</span></th>
+            <th class="tb-tnx-info">
+                <span class="tb-tnx-desc d-none d-sm-inline-block">
+                    <span>Full Name</span>
+                </span>
+            </th>
+            <th class="tb-tnx-info">
+                <span class="tb-tnx-desc d-none d-sm-inline-block">
+                    <span>Department</span>
+                </span>
+            </th>
 
-<div class="nk-tb-col"><span class="sub-text">No</span></div>
-<div class="nk-tb-col tb-col-sm"><span class="sub-text"><strong>Full Name</strong></span></div>
-<div class="nk-tb-col tb-col-md"><span class="sub-text">Department</span></div>
-<div class="nk-tb-col tb-col-lg"><span class="sub-text">Email</span></div>
-<div class="nk-tb-col tb-col-lg"><span class="sub-text">Status</span></div>
-<div class="nk-tb-col text-end"><span class="sub-text">Actions</span></div>
-</div><!-- .nk-tb-item -->
-<!-- .nk-tb-item -->
+            <th class="tb-tnx-info">
+                <span class="tb-tnx-desc d-none d-sm-inline-block">
+                    Email
+                </span>
+            </th>
 
+            <th class="tb-tnx-info">
+                <span class="tb-tnx-desc d-none d-sm-inline-block">
+                    Status
+                </span>
+            </th>
 
-@foreach($data as $details)
+            <th class="tb-tnx-info">
+                <span class="tb-tnx-desc d-none d-sm-inline-block">
+                    Days
+                </span>
+            </th>
 
-<div class="nk-tb-item">
-<div class="nk-tb-col nk-tb-col-check">
-    <div class="custom-control custom-control-sm custom-checkbox notext">
-        <input type="checkbox" class="custom-control-input" id="cid1">
-        <label class="custom-control-label" for="cid1"></label>
-    </div>
-</div>
-<div class="nk-tb-col">
-    1
-</div>
-<div class="nk-tb-col tb-col-sm">
-    <span class="sub-text">{{ $details->name }}</span>
-</div>
-<div class="nk-tb-col tb-col-md">
-    <span class="sub-text">Finance</span>
-</div>
-<div class="nk-tb-col tb-col-lg">
-    <span class="sub-text">{{ $details->email }}</span>
-</div>
+            <th class="tb-tnx-info text-center" style="width:200px;">
+                <span class="tb-tnx-desc">
+                    Action
+                </span>
+            </th>
+        </tr>
+    </thead>
 
-<div class="nk-tb-col tb-col-xxl">
-    <span class="sub-text">Active</span>
-</div>
-<div class="nk-tb-col tb-col-lg">
-    <span class="tb-status text-success">Active</span>
-</div>
-<div class="nk-tb-col nk-tb-col-tools">
-    <ul class="nk-tb-actions gx-1">
-        <li>
-            <a href="{{ route('mu.request-account-edit',$details->id) }}" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Send Email" data-bs-original-title="Update">
-                <em class="icon ni ni-edit-fill"></em>
-            </a>
-        </li>
-        <li>
-            <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Suspend" data-bs-original-title="Delete">
-                <em class="icon ni ni-cross-fill-c"></em>
-            </a>
-        </li>
-    </ul>
-</div>
-</div>
-
-@endforeach
-
-<!-- .nk-tb-item -->
-</div><!-- .nk-tb-list -->
-</div><!-- .card-inner -->
-<div class="card-inner">
-<div class="nk-block-between-md g-3">
-<div class="g">
-<ul class="pagination justify-content-center justify-content-md-start">
-    <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><span class="page-link"><em class="icon ni ni-more-h"></em></span></li>
-    <li class="page-item"><a class="page-link" href="#">6</a></li>
-    <li class="page-item"><a class="page-link" href="#">7</a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-</ul><!-- .pagination -->
-</div>
-<div class="g">
-
-</div><!-- .pagination-goto -->
-</div><!-- .nk-block-between -->
-</div><!-- .card-inner -->
-</div><!-- .card-inner-group -->
-</div><!-- .card -->
-</div><!-- .nk-block -->
-                            </div>
-                        </div>
-                    </div>
+    <tbody>
+        @foreach($data as $details)
+        <tr class="tb-tnx-item">
+            <td class="tb-tnx-id">
+                {{ $loop->index + 1 }}
+            </td>
+            
+            <td class="tb-tnx-info">
+                <div class="tb-tnx-desc">
+                    <span class="title">{{ $details->name }}</span>
                 </div>
+            </td>
+
+            <td class="tb-tnx-info">
+                <div class="tb-tnx-desc">
+                    <span class="title">{{ $details->department }}</span>
+                </div>
+            </td>
+
+             <td class="tb-tnx-info">
+                <div class="tb-tnx-desc">
+                    <span class="title">{{ $details->id }}</span>
+                </div>
+            </td>
+
+            <td class="tb-tnx-info">
+                <div class="tb-tnx-desc">
+                    <span class="title">{{ $details->created_at }}</span>
+                </div>
+            </td>
+
+            <td class="tb-tnx-info">
+                <div class="tb-tnx-desc">
+                    <span class="title">2 Days</span>
+                </div>
+            </td>
+            
+            <td class="tb-tnx-info text-center">
+                <button type="button"  value="{{ $details->id }}" class="btn btn-sm btn-outline-primary modReqEdit">Edit</button>
+                <button type="button" value="{{ $details->id }}" class="btn btn-sm btn-outline-danger modReqDelete">Delete</button>
+            </td>
+        </tr>
+        @endforeach()
+    </tbody>
+</table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- edit modal!-->
+
+<div class="modal fade zoom" tabindex="-1" id="editReqModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <em class="icon ni ni-cross"></em>
+            </a>
+            <div class="modal-header">
+                <h5 class="modal-title">Update User Request Account</h5>
+            </div>
+
+<form action="{{ route('mu.request-account-move') }}" method="POST" id="ValidateUpdateRequest">
+    @csrf
+<div class="modal-body">
+
+<div style="margin-bottom:10px">
+    <input type="hidden" class="form-control" id="the_id" name="the_id" required>
+    <input type="hidden" class="form-control" id="thefullname" name="thefullname">
+    <strong>Full Name : </strong> <span id="the_fullname"></span>
+</div>
+
+<div style="margin-bottom:10px">
+    <strong>E-mail : </strong> <span id="the_email"></span> 
+</div>
+
+
+<div style="margin-bottom:10px">
+    <strong>Department :</strong> <span id="the_department"></span>
+</div>
+
+
+<div style="margin-bottom:10px">
+    <strong>Date Create : </strong> <span id="the_created"></span>
+</div>
+
+<hr>
+
+
+<div class="form-group">
+<label class="form-label">Select Department</label>
+<div class="form-control-wrap">
+    <select class="form-select js-select2" tabindex="-1">
+        @foreach($department as $dept)
+            <option value="{{ $dept->id }}">{{ $dept->department }}</option>
+        @endforeach
+    </select>
+</div>
+</div>
+
+
+</div>
+<div class="modal-footer bg-light">
+    <button type="submit" class="btn btn-primary" id="SaveInfo">Update Information</button>
+</div>
+
+</form>
+
+        </div>
+    </div>
+</div>
+
+<!-- end of edit modal!-->
+
+
+
+<!-- delete modal!-->
+
+<div class="modal fade zoom" tabindex="-1" id="deleteReqModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <em class="icon ni ni-cross"></em>
+            </a>
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Request Account</h5>
+            </div>
+
+<form action="{{ route('mu.request-account-delete') }}" method="POST">
+    @csrf
+<div class="modal-body">
+
+<div class="alert-text">
+    <h6 class="text-danger">Are you sure you want to delete?</h6>
+</div><br>
+
+<div style="margin-bottom:10px">
+    <input type="hidden" class="form-control" id="del_id" name="del_id" required>
+    <strong>Full Name : </strong> <span id="del_fullname"></span>
+</div>
+
+<div style="margin-bottom:10px">
+    <strong>E-mail : </strong> <span id="del_email"></span> 
+</div>
+
+
+<div style="margin-bottom:10px">
+    <strong>Department :</strong> <span id="del_department"></span>
+</div>
+
+
+<div style="margin-bottom:10px">
+    <strong>Date Create : </strong> <span id="del_created"></span>
+</div>
+
+
+</div>
+<div class="modal-footer bg-light">
+    <button type="submit" class="btn btn-danger">Delete Information</button>
+</div>
+
+</form>
+
+        </div>
+    </div>
+</div>
+
+<!-- end of delete modal!-->
+
+
+<script type="text/javascript">
+
+$(document).ready(function () {
+$(document).on('click','.modReqEdit', function() { let ids = $(this).val();
+
+    $('#editReqModal').modal('show');
+    $.ajax({
+        type: "GET",
+        url: "http://127.0.0.1:8000/mdd-properties/dashboard/jsx/manage-user/request-account-edit/"+ids,
+        success: function(response) {
+            $('#the_id').val(response.data.id);
+
+            document.getElementById('the_fullname').innerText = response.data.name;
+            $('#thefullname').val(response.data.name);
+            document.getElementById('the_email').innerText = response.data.email;
+            $('#thefullname').val(response.data.name);
+            document.getElementById('the_department').innerText = response.data.dep_name;
+            $('#thefullname').val(response.data.name);
+            document.getElementById('the_created').innerText = response.data.created_at;
+            $('#thefullname').val(response.data.name);
+        }
+    });
+});
+});
+
+
+
+$(document).ready(function () {
+$(document).on('click','.modReqDelete', function() { let ids = $(this).val();
+
+    $('#deleteReqModal').modal('show');
+    $.ajax({
+        type: "GET",
+        url: "http://127.0.0.1:8000/mdd-properties/dashboard/jsx/manage-user/request-account-edit/"+ids,
+        success: function(response) {
+            $('#del_id').val(response.data.id);
+
+            document.getElementById('del_fullname').innerText = response.data.name;
+            document.getElementById('del_email').innerText = response.data.email;
+            document.getElementById('del_department').innerText = response.data.dep_name;
+            document.getElementById('del_created').innerText = response.data.created_at;
+        }
+    });
+});
+});
+
+
+</script>
+
 @endsection

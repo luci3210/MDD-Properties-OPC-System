@@ -40,7 +40,7 @@
             <a href="{{ route('mu.request-account-index') }}" class="nk-menu-link"><span class="nk-menu-text">Request Account</span></a>
         </li>
         <li class="nk-menu-item">
-            <a href="html/project-list.html" class="nk-menu-link"><span class="nk-menu-text">User List</span></a>
+            <a href="{{ route('mu.user-index') }}" class="nk-menu-link"><span class="nk-menu-text">User List</span></a>
         </li>
     </ul>
 

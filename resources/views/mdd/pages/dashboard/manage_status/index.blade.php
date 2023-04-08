@@ -207,7 +207,6 @@
         <h6 class="text-danger">Are you sure you want to delete?</h6>
     </div>
     <input type="hidden" class="form-control" id="del_id" name="del_id">
-    <input type="text" class="form-control" name="del_status" value="delete">
 
 </div>
 <div class="modal-footer bg-light">
