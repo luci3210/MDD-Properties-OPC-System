@@ -31,18 +31,20 @@ class manageusercontroller extends Controller
         }
     }
 
-    public function request_account_edit($id) {
+    public function request_account_edit($uqid) {
 
         try {
 
         $data = RegisterModel::join('departments', 'register_models.department','=','departments.id')
-                    ->select('register_models.id','register_models.name','register_models.email','register_models.created_at','departments.department as dep_name')
-                        ->where('register_models.id','=',$id)
+                    ->select('register_models.uqid','register_models.id','register_models.name','register_models.email','register_models.created_at','departments.department as dep_name')
+                        ->where('register_models.uqid','=',$uqid)
                             ->where(function ($query) {
                             $query->from('register_models');
                          })->first();
 
-        return response()->json(['status' => 200,'data' => $data]);  
+        return view('mdd.pages.dashboard.manage_user.request_account_update',['data'=> $data]);
+
+        // return response()->json(['status' => 200,'data' => $data]);  
 
         } catch (\Exception $e) {
 
@@ -70,6 +72,7 @@ class manageusercontroller extends Controller
             $data = RegisterModel::findOrFail($request->id);
 
             if($data) {
+
 
                 $get = User::create([
                     'name' => $data->name,

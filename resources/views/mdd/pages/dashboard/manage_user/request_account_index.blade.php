@@ -114,7 +114,7 @@
             </td>
             
             <td class="tb-tnx-info text-center">
-                <button type="button"  value="{{ $details->id }}" class="btn btn-sm btn-outline-primary modReqEdit">Edit</button>
+                <a href="{{ route('mu.request-account-edit',$details->uqid) }}" class="btn btn-sm btn-outline-primary">Edit</a>
                 <button type="button" value="{{ $details->id }}" class="btn btn-sm btn-outline-danger modReqDelete">Delete</button>
             </td>
         </tr>

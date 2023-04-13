@@ -7,6 +7,7 @@ use App\Http\Controllers\mdd\dashboard\manageusercontroller;
 use App\Http\Controllers\mdd\dashboard\departmentcontroller;
 use App\Http\Controllers\mdd\dashboard\statuscontroller;
 use App\Http\Controllers\mdd\dashboard\myemailcontroller;
+use App\Http\Controllers\mdd\dashboard\generateuqid;
 use App\Http\Livewire\Manage\ManageStatus;
 use App\Http\Livewire\Manage\ManageComponentStatus;
 
@@ -55,6 +56,16 @@ Route::prefix('mdd-properties-opc/dashboard/')->group(function(){
             ->group(function() {
 
                 Route::get('index','index')->name('user.index');
+
+    });
+});
+
+Route::prefix('mdd-properties-opc/generateuqid')->group(function(){
+    Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
+        ->controller(generateuqid::class)
+            ->group(function() {
+
+                Route::get('generate','generateNine')->name('generate-nine');
 
     });
 });

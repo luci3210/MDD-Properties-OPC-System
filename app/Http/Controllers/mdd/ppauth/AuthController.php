@@ -8,6 +8,7 @@ use App\Models\mdd\RegisterModel;
 use Illuminate\Support\Facades\Hash;
 
 use App\Http\Controllers\mdd\dashboard\departmentcontroller;
+use App\Http\Controllers\mdd\dashboard\generateuqid;
 
 class AuthController extends Controller
 {
@@ -18,7 +19,7 @@ class AuthController extends Controller
 
     }
 
-    public function register_submit(Request $request) {
+    public function register_submit(Request $request, generateuqid $reqid) {
 
         $input = [
             'fullname' => 'required|max:50',
@@ -35,6 +36,7 @@ class AuthController extends Controller
 
         try {
 
+
         $insert = RegisterModel::firstOrCreate(
             [
                 'name'=> $request->fullname,
@@ -42,6 +44,7 @@ class AuthController extends Controller
                 'email' => $request->email,
                 'password' =>  Hash::make($request->password),
                 'status' => 1,
+                'uqid'=> $reqid->generateNine(),
                 ]
             );
 
