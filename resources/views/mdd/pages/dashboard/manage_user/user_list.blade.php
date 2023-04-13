@@ -117,8 +117,7 @@
             </td>
             
             <td class="tb-tnx-info text-center">
-                <button type="button"  value="{{ $users->id }}" class="btn btn-sm btn-outline-primary modReqEdit">Edit</button>
-                <button type="button" value="{{ $users->id }}" class="btn btn-sm btn-outline-danger modReqDelete">Delete</button>
+                <button type="button"  value="{{ $users->id }}" class="btn btn-sm btn-outline-primary modUserEdit">Edit</button>
             </td>
         </tr>
         @endforeach()
@@ -137,4 +136,116 @@
 		</div>
 	</div>
 </div>
+
+
+
+<!-- edit modal!-->
+
+<div class="modal fade zoom" tabindex="-1" id="editUserModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <em class="icon ni ni-cross"></em>
+            </a>
+            <div class="modal-header">
+                <h5 class="modal-title">Update User</h5>
+            </div>
+
+<form action="{{ route('mu.request-account-move') }}" method="POST" id="ValidateUpdateRequest">
+    @csrf
+<div class="modal-body">
+
+<div style="margin-bottom:10px">
+    <input type="hidden" class="form-control" id="the_id" name="the_id">
+</div>
+
+ <div class="form-group">
+    <label class="form-label" for="default-01">Full Name</label>
+    <div class="form-control-wrap">
+        <input type="text" class="form-control" id="the_name" name="the_name" required>
+    </div>
+</div>
+
+<div class="form-group">
+<label class="form-label">Current Department (* <span style="color:red" id="the_department"></span>)</label>
+<div class="form-control-wrap">
+    <select class="form-select js-select2" tabindex="-1">
+
+            <option value="0">-Select Department-</option>
+        @foreach($theDepartment as $dept)
+            <option value="{{ $dept->id }}">{{ $dept->department }}</option>
+        @endforeach
+    </select>
+</div>
+</div>
+
+<div class="form-group">
+    <label class="form-label" for="default-01">Email</label>
+    <div class="form-control-wrap">
+        <input type="text" class="form-control" id="the_email" name="the_email" required>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="form-label" for="default-01">Phone No.</label>
+    <div class="form-control-wrap">
+        <input type="text" class="form-control" id="the_phone" name="the_phone" required>
+    </div>
+</div>
+
+
+<div class="form-group">
+<label class="form-label">Current Status (* <span style="color:red" id="the_status"></span>)</label>
+<div class="form-control-wrap">
+    <select class="form-select js-select2">
+        @foreach($theStatus as $status)
+            <option value="{{ $status->id }}">{{ $status->name }}</option>
+        @endforeach
+    </select>
+</div>
+</div>
+
+
+
+</div>
+<div class="modal-footer bg-light">
+    <button type="submit" class="btn btn-primary" id="SaveInfo">Update Information</button>
+</div>
+
+</form>
+
+        </div>
+    </div>
+</div>
+
+<!-- end of edit modal!-->
+
+
+<script type="text/javascript">
+	$(document).ready(function () {
+	$(document).on('click','.modUserEdit', function() { let ids = $(this).val();
+
+    $('#editUserModal').modal('show');
+    $.ajax({
+        type: "GET",
+        url: "http://127.0.0.1:8000/mdd-properties/dashboard/jsx/manage-user/user-edit/"+ids,
+        success: function(response) {
+            $('#the_id').val(response.data.id);
+            $('#the_name').val(response.data.name);
+            $('#the_email').val(response.data.email);
+            $('#the_phone').val(response.data.phone_number);
+            $('#the_department').val(response.data.department);
+            document.getElementById('the_department').innerText = response.data.department_name;
+            document.getElementById('the_status').innerText = response.data.status_name;
+            // document.getElementById('the_status').innerText = response.data.status_id;
+            // var thestatus = response.data.status_id;
+            //  var statElem = document.getElementById('thestatus');
+        }
+    });
+});
+});
+
+</script>
+
+
 @endsection

@@ -16,6 +16,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
+    <style>
+        .form-control {
+            border: 1px solid #000 !important;
+        }
+    </style>
+
 </head>
 
     <body class="nk-body bg-lighter npc-general has-sidebar ">

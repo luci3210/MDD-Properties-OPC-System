@@ -7,10 +7,15 @@ use Illuminate\Http\Request;
 use App\Models\mdd\RegisterModel;
 use Illuminate\Support\Facades\Hash;
 
+use App\Http\Controllers\mdd\dashboard\departmentcontroller;
+
 class AuthController extends Controller
 {
-    public function register() {
-        return view('mdd.pages.pp_auth.registration');
+    public function register(departmentcontroller $listing) {
+
+        $department = $listing->listing();
+        return view('mdd.pages.pp_auth.registration',['department'=> $department]);
+
     }
 
     public function register_submit(Request $request) {

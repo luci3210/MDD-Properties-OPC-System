@@ -56,12 +56,11 @@
     @enderror
 </label>
 <div class="form-control-wrap ">
-    <select class="form-select form-select-lg js-select2 select2-hidden-accessible valid @error('department') is-invalid @enderror" id="fva-topics" name="department" data-placeholder="Select department" data-select2-id="fva-topics" tabindex="-1" aria-hidden="true" aria-invalid="false">
-        <option label="empty" value="" data-select2-id=""></option>
-        <option value="1" data-select2-id="8">Finance</option>
-        <option value="2" data-select2-id="9">Casher</option>
-        <option value="3" data-select2-id="10">Broker</option>
-        <option value="4" data-select2-id="11">Agent</option>
+    <select class="form-select form-select-lg" name="department" data-placeholder="Select department">
+        <option label="Select Department" value="" ></option>
+        @foreach($department as $list)
+            <option value="{{ $list->ids }}" >{{ $list->department }}</option>
+        @endforeach
     </select>
 </div>
 </div>

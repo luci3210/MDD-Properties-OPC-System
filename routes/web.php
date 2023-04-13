@@ -6,6 +6,7 @@ use App\Http\Controllers\mdd\dashboard\UserController;
 use App\Http\Controllers\mdd\dashboard\manageusercontroller;
 use App\Http\Controllers\mdd\dashboard\departmentcontroller;
 use App\Http\Controllers\mdd\dashboard\statuscontroller;
+use App\Http\Controllers\mdd\dashboard\myemailcontroller;
 use App\Http\Livewire\Manage\ManageStatus;
 use App\Http\Livewire\Manage\ManageComponentStatus;
 
@@ -70,9 +71,23 @@ Route::prefix('mdd-properties/dashboard/jsx/manage-user')->group(function(){
                 Route::post('request-account-delete','request_account_delete')->name('mu.request-account-delete');
 
                 Route::get('user-list','user_index')->name('mu.user-index');
+                Route::get('user-edit/{id}','user_edit')->name('mu.user-edit');
 
     });
 });
+
+
+// MANAGE USER send EMAIL
+Route::prefix('mdd-properties/dashboard/jsx/manage-email')->group(function(){
+    Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
+        ->controller(myemailcontroller::class)
+            ->group(function() {
+
+                Route::get('sendmail','sendEmail')->name('mu.user-edit');
+
+    });
+});
+
 
 // MANAGE DEPARTMENT
 Route::prefix('mdd-properties/dashboard/jsx/manage-department')->group(function(){

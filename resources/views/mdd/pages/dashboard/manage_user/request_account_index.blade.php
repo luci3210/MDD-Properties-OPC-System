@@ -10,9 +10,9 @@
 <div class="nk-block-head nk-block-head-sm">
     <div class="nk-block-between g-3">
         <div class="nk-block-head-content">
-            <h3 class="nk-block-title page-title">Manage User</h3>
+            <h3 class="nk-block-title page-title">Manage User / Request account</h3>
             <div class="nk-block-des text-soft">
-                <p><strong>Request account</strong> <span style="color:red;font-style: italic;">(For Verification)</span></p>
+                <p> <span style="color:red;">(For Verification)</span></p>
             </div>
         </div>
     </div>
@@ -152,8 +152,7 @@
 <div class="modal-body">
 
 <div style="margin-bottom:10px">
-    <input type="hidden" class="form-control" id="the_id" name="the_id" required>
-    <input type="hidden" class="form-control" id="thefullname" name="thefullname">
+    <input type="hidden" class="form-control" id="id" name="id" required>
     <strong>Full Name : </strong> <span id="the_fullname"></span>
 </div>
 
@@ -177,9 +176,10 @@
 <div class="form-group">
 <label class="form-label">Select Department</label>
 <div class="form-control-wrap">
-    <select class="form-select js-select2" tabindex="-1">
-        @foreach($department as $dept)
-            <option value="{{ $dept->id }}">{{ $dept->department }}</option>
+    <select class="form-select" name="department">
+        <option label="Select Department" value="" > Select Department </option>
+        @foreach($department as $listing)
+            <option value="{{ $listing->ids }}">{{ $listing->department }}</option>
         @endforeach
     </select>
 </div>
@@ -265,7 +265,7 @@ $(document).on('click','.modReqEdit', function() { let ids = $(this).val();
         type: "GET",
         url: "http://127.0.0.1:8000/mdd-properties/dashboard/jsx/manage-user/request-account-edit/"+ids,
         success: function(response) {
-            $('#the_id').val(response.data.id);
+            $('#id').val(response.data.id);
 
             document.getElementById('the_fullname').innerText = response.data.name;
             $('#thefullname').val(response.data.name);

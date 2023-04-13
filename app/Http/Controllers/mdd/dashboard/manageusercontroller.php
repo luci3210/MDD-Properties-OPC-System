@@ -9,13 +9,15 @@ use App\Models\mdd\UserDepatment;
 use App\Models\User;
 use App\Models\mdd\Status;
 use DB;
+use App\Http\Controllers\mdd\dashboard\departmentcontroller;
 
 class manageusercontroller extends Controller
 {
-    public function request_account() {
+    public function request_account(departmentcontroller $department) {
 
         try {
-        $department = DB::table('departments')->select('department','id')->where('status',1)->get();
+
+        $department = $department->listing();
 
         $data = DB::table('register_models')
             ->join('statuses', 'register_models.status','=','statuses.id')
@@ -48,48 +50,54 @@ class manageusercontroller extends Controller
         }
     }
 
-    public function request_account_move(Request $request, $id) { //save to user model
-
-        $input = [
-            'fullname' => 'required|max:50',
-            'department' => 'required|numeric',
-            'email' => 'required|email|unique:users,email',
-            'status' => 'required|min:1|max:2'];
-
-        $error = [
-            'required' => '* Enter your :attribute', 
-            'numeric'=>'invalid value :attribute',
-            'email'=>'invalid email :attribute'];
-
-        $this->validate($request, $input, $error);
+    public function request_account_move(Request $request) { //save to user model
 
         try {
+
+            $request->validate(
+                [
+                    'id' => 'required|numeric',
+                    'department' => 'required|numeric'
+                ],
+                [
+                    'department.required' => 'Invalid input value',
+                    'department.numeric' => 'Invalid input value',
+                    'id.required' => 'Invalid input value',
+                    'id.numeric' => 'Invalid input value',
+                ]
+            );
             
-            $data = RegisterModel::findOrFail($id);
+            $data = RegisterModel::findOrFail($request->id);
 
             if($data) {
 
-                $get = User::firstOrCreate([
+                $get = User::create([
                     'name' => $data->name,
                     'email' => $data->email,
                     'password' => $data->password,
+                    'department' => $request->department,
+                    'status' => 2,
+                    'phone_number' => '123456789'
                 ]);
 
                  $notification = array(
                     'success' => 'Account successfully updated and please do advice to check the email to activate the account.',
                 );
 
-                UserDepatment::create([
-                    'user_id' => $get->id,
-                    'user_department_id' => $data->department,
-                    'atatus' => $data->status,
-                ]);
+                // UserDepatment::create([
+                //     'user_id' => $get->id,
+                //     'user_department_id' => $data->department,
+                //     'atatus' => $data->status,
+                // ]);
 
                 return redirect()->route('mu.request-account-index')->with($notification);
 
             }
+            
             else {
-                return "sdsds";
+               
+               return view('mdd.pages.error.404');
+
             }
                 
         } catch (\Exception $e) {
@@ -124,15 +132,40 @@ class manageusercontroller extends Controller
         }
     }
 
+    public function the_status() {
+
+            return Status::all();
+    }
+
+    public function the_department() {
+
+        return UserDepatment::all();
+    }
+
     public function user_index() {
 
+        $theStatus = $this->the_status();
+        $theDepartment = $this->the_department();
+
         $users = User::join('departments','users.department','=','departments.id')
-                ->join('statuses','departments.status','=','statuses.id')->select('users.id','users.name','users.email','users.department','users.status','users.phone_number','departments.department as department_name','statuses.name as status_name')
+                ->join('statuses','departments.status','=','statuses.id')->select('users.id','users.name','users.email','users.department','users.status','users.phone_number','departments.department as department_name','statuses.id as status_id','statuses.name as status_name')
                     ->where(function ($query) {
                         $query->from('users');
                              })->get(); 
 
-        return view('mdd.pages.dashboard.manage_user.user_list',['user'=>$users]);
+        return view('mdd.pages.dashboard.manage_user.user_list',['user'=>$users, 'theDepartment'=>$theDepartment,'theStatus'=>$theStatus]);
+    }
+
+    public function user_edit($id) {
+
+        $users = User::join('departments','users.department','=','departments.id')
+                ->join('statuses','departments.status','=','statuses.id')->select('users.id','users.name','users.email','users.department','users.status','users.phone_number','departments.department as department_name','statuses.id as status_id','statuses.name as status_name')
+                    ->where('users.id','=',$id)
+                    ->where(function ($query) {
+                        $query->from('users');
+                             })->first(); 
+
+        return response()->json(['status' => 200,'data' => $users]);  
     }
 
 
