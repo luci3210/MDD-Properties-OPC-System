@@ -99,11 +99,11 @@ Route::prefix('mdd-properties/dashboard/jsx/manage-user')->group(function(){
                 Route::get('request-account-index','request_account')->name('mu.request-account-index');
                 Route::get('request-account-update/{id}','edit_request_account')->name('mu-edit-equest-account');
                 Route::post('request-account-move','request_account_move')->name('mu-request-account-move');
-
                 Route::post('request-account-delete','request_account_delete')->name('mu-request-account-delete');
 
                 Route::get('user-list','user_index')->name('mu.user-index');
                 Route::get('user-edit/{id}','user_edit')->name('mu.user-edit');
+                Route::post('user-update','user_update')->name('mu-user-update');
 
     });
 });

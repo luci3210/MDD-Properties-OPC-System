@@ -20,6 +20,9 @@
         .form-control {
             border: 1px solid #000 !important;
         }
+        .is-dark {
+/*            background: #c27ba3 !important;*/
+        }
     </style>
 
 </head>

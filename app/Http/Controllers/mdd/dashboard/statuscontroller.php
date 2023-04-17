@@ -19,18 +19,20 @@ class statuscontroller extends Controller
 
     public function __construct(validateUser $validateUser) {
 
-        // $user = 2;
-
         $this->validateUser = $validateUser;
-        
     }
 
     public function index() {
 
-        $this->validateUser->validateDepartment(Auth::user()->department);
+        try {
 
-        $statuses = Status::all(); 
+        $statuses = $this->status_listing();
         return view('mdd.pages.dashboard.manage_status.index',compact('statuses'));
+
+        } catch (\Exception $e) {
+
+            abort(404);
+        }
     }
 
     public function status_form_edit($id) {
@@ -127,5 +129,10 @@ class statuscontroller extends Controller
 
             return view('mdd.pages.error.404');
         }
+    }
+
+    public function status_listing() {
+
+            return $listing = Status::all();
     }
 }

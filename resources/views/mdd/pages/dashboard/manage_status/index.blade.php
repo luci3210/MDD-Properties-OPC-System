@@ -34,60 +34,38 @@
 </div>
 
 <div class="nk-block">
-    <div class="card card-bordered card-stretch">
+    <div class="card card-table-bordered card-stretch">
         <div class="container-fluid">
             <div style="margin-top:10px; margin-left: 5px; margin-right: 5px;">
                 {{-- <livewire:manage-status /> --}}
 
 
-<table class="table table-tranx">
-    <thead>
-        <tr class="tb-tnx-head">
-            <th class="tb-tnx-id"><span class="">#</span></th>
-            <th class="tb-tnx-info">
-                <span class="tb-tnx-desc d-none d-sm-inline-block">
-                    <span>Status Name</span>
-                </span>
-            </th>
-            <th class="tb-tnx-info">
-                <span class="tb-tnx-desc d-none d-sm-inline-block">
-                    <span>Status Description</span>
-                </span>
-            </th>
+<table class="table table-hover">
+  <thead class="table-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Status</th>
+      <th scope="col">Description</th>
+      <th scope="col" class="text-center">Action</th>
+    </tr>
+  </thead>
 
-            <th class="tb-tnx-info text-center" style="width:200px;">
-                <span class="tb-tnx-desc">
-                    Action
-                </span>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($statuses as $status)
-        <tr class="tb-tnx-item">
-            <td class="tb-tnx-id">
-                {{ $loop->index + 1 }}
-            </td>
-            <td class="tb-tnx-info">
-                <div class="tb-tnx-desc">
-                    <span class="title">{{ $status->name }}</span>
-                </div>
-            </td>
-             <td class="tb-tnx-info">
-                <div class="tb-tnx-desc">
-                    <span class="title">{{ $status->description }}</span>
-                </div>
-            </td>
+  <tbody>
+    @foreach($statuses as $status)
+    <tr style="font-size:13px;">
+      <th scope="row">{{ $loop->index + 1 }}</th>
+      <td>{{ $status->name }}</td>
+      <td>{{ $status->description }}</td>
+      <td style="width:200px;text-align: center;">
+        <button type="button"  value="{{ $status->id }}" class="btn btn-sm btn-outline-primary ActionEdit">Update</button>
+      </td>
+    </tr>
+    @endforeach
+  </tbody>
 
-            
-            <td class="tb-tnx-info text-center">
-<button type="button"  value="{{ $status->id }}" class="btn btn-sm btn-outline-primary modEdit">Edit</button>
-<button type="button" value="{{ $status->id }}" class="btn btn-sm btn-outline-danger modDelete">Delete</button>
-            </td>
-        </tr>
-        @endforeach()
-    </tbody>
 </table>
+
+
 
 
             </div>
@@ -144,14 +122,14 @@
 
 <!-- edit modal!-->
 
-<div class="modal fade zoom" tabindex="-1" id="editModal">
+<div class="modal fade zoom" tabindex="-1" id="ActionEditModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
                 <em class="icon ni ni-cross"></em>
             </a>
             <div class="modal-header">
-                <h5 class="modal-title">Edit Status</h5>
+                <h5 class="modal-title">Update Status</h5>
             </div>
 
 <form action="{{ route('status-form-update') }}" method="POST" id="ValidateEditStatus">
@@ -228,10 +206,10 @@
 <script type="text/javascript">
 
 $(document).ready(function () {
-    $(document).on('click','.modEdit', function() {
+    $(document).on('click','.ActionEdit', function() {
 
         var ids = $(this).val();
-        $('#editModal').modal('show');
+        $('#ActionEditModal').modal('show');
         $.ajax({
             type: "GET",
             url: "http://127.0.0.1:8000/mdd-properties/dashboard/jsx/managestatus/status-form-edit/"+ids,

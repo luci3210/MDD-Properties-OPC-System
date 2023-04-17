@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\mdd\Status;
 use DB;
 use App\Http\Controllers\mdd\dashboard\departmentcontroller;
+use App\Http\Controllers\mdd\dashboard\statuscontroller;
 use App\Http\Controllers\mdd\dashboard\generateuqid;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendStaffVerification;
@@ -21,7 +22,7 @@ class manageusercontroller extends Controller
 
     protected $validateUser;
 
-    public function __construct(validateUser $validateUser) {
+        public function __construct(validateUser $validateUser) {
 
         $this->validateUser = $validateUser;
 
@@ -141,33 +142,24 @@ class manageusercontroller extends Controller
         }
     }
 
-    public function the_status() {
+    public function user_index(departmentcontroller $department, statuscontroller $status_listing) {
 
-            return Status::all();
-    }
 
-    public function the_department() {
+        $status = $status_listing->status_listing();
+        $department = $department->listing();
 
-        return UserDepatment::all();
-    }
-
-    public function user_index() {
-
-        $theStatus = $this->the_status();
-        $theDepartment = $this->the_department();
-
-        $users = User::join('departments','users.department','=','departments.id')
-                ->join('statuses','departments.status','=','statuses.id')->select('users.id','users.name','users.email','users.uqid','users.department','users.status','users.phone_number','departments.department as department_name','statuses.id as status_id','statuses.name as status_name')
+        $users = User::join('departments','users.department','=','departments.did')
+                    ->join('statuses','users.status','=','statuses.id')->select('users.id','users.name','users.email','users.uqid','users.department','users.status','users.phone_number','departments.department as department_name','statuses.id as status_id','statuses.name as status_name')
                     ->where(function ($query) {
                         $query->from('users');
                              })->get(); 
 
-        return view('mdd.pages.dashboard.manage_user.user_list',['user'=>$users, 'theDepartment'=>$theDepartment,'theStatus'=>$theStatus]);
+        return view('mdd.pages.dashboard.manage_user.user_list',['user'=>$users, 'department'=>$department,'status'=>$status]);
     }
 
     public function user_edit($id) {
 
-        $users = User::join('departments','users.department','=','departments.id')
+        $users = User::join('departments','users.department','=','departments.did')
                 ->join('statuses','departments.status','=','statuses.id')->select('users.id','users.name','users.email','users.department','users.status','users.phone_number','departments.department as department_name','statuses.id as status_id','statuses.name as status_name')
                     ->where('users.id','=',$id)
                     ->where(function ($query) {
@@ -175,5 +167,40 @@ class manageusercontroller extends Controller
                              })->first(); 
 
         return response()->json(['status' => 200,'data' => $users]);  
+    }
+
+    public function user_update(Request $request) {
+
+         try {
+
+            $request->validate(
+                [
+                    'the_id' => 'required|numeric',
+                    'department' => 'required|numeric',
+                    'status' => 'required|numeric',
+                ], 
+                [
+                    'the_id.required' => 'Somthing wrong with input value.',
+                    'the_id.numeric' => 'Somthing wrong with input value.',
+                    'department.required' => 'Somthing wrong with input value.',
+                    'department.numeric' => 'Somthing wrong with input value.',
+                    'status.required' => 'Somthing wrong with input value.',
+                    'status.numeric' => 'Somthing wrong with input value.',
+                ]
+            );
+            
+            $user = User::findOrFail($request->the_id);
+            $user->update([
+                'department' => $request->department,
+                'status' => $request->status,
+                ]);
+            
+            return back()->with('success', 'Status details successfully updated.');
+
+        } catch (\Exception $e) {
+
+            abort(404);
+        }
+
     }
 }
