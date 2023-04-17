@@ -6,12 +6,39 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\mdd\RegisterModel;
 use Illuminate\Support\Facades\Hash;
-
 use App\Http\Controllers\mdd\dashboard\departmentcontroller;
 use App\Http\Controllers\mdd\dashboard\generateuqid;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class AuthController extends Controller
 {
+    public function staffVerifyEmail($id, $uqid) {
+
+        $user = User::findOrFail($id);
+        
+        if ($user->email_verified_at) {
+            return redirect('/home');
+        }
+
+        if ($user->uqid == $uqid) {
+
+            $user->email_verified_at = now();
+            $user->save();
+
+            return redirect('/login')->with('success', 'Your email has been verified!');
+
+        } 
+
+        else {
+
+                return redirect('/login')->with('error', 'Invalid verification link!');
+
+            }
+
+        }
+
     public function register(departmentcontroller $listing) {
 
         $department = $listing->listing();
@@ -53,7 +80,7 @@ class AuthController extends Controller
             // 'error' => 'Please check your input carefully.'
         );
 
-        return redirect()->route('private_register')->with($notification);
+        return redirect()->route('staff_register')->with($notification);
 
         } catch (\Exception $e) {
 

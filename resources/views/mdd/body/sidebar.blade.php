@@ -29,28 +29,21 @@
         <span class="nk-menu-text">Manage User</span>
     </a>
     <ul class="nk-menu-sub">
-        <li class="nk-menu-item">
-            <a href="{{ route('mu.request-account-index') }}" class="nk-menu-link"><span class="nk-menu-text">Request Account</span></a>
-        </li>
-        <li class="nk-menu-item">
-            <a href="{{ route('mu.user-index') }}" class="nk-menu-link"><span class="nk-menu-text">Users List</span></a>
-        </li>
-    </ul>
-</li>
 
-<li class="nk-menu-item has-sub">
-    <a href="{{ route('manage-department-index') }}" class="nk-menu-link">
-        <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
-        <span class="nk-menu-text">Manage Department</span>
-    </a>
-{{--     <ul class="nk-menu-sub">
         <li class="nk-menu-item">
-            <a href="html/project-card.html" class="nk-menu-link"><span class="nk-menu-text">Project Cards</span></a>
+            <a href="{{ route('mu.user-index') }}" class="nk-menu-link"><span class="nk-menu-text">Manage Users</span></a>
         </li>
         <li class="nk-menu-item">
-            <a href="html/project-list.html" class="nk-menu-link"><span class="nk-menu-text">Project List</span></a>
+            <a href="#" class="nk-menu-link"><span class="nk-menu-text">Manage Role</span></a>
         </li>
-    </ul> --}}
+        <li class="nk-menu-item">
+            <a href="{{ route('manage-department-index') }}" class="nk-menu-link"><span class="nk-menu-text">Manage Department</span></a>
+        </li>
+        <li class="nk-menu-item">
+            <a href="{{ route('mu.request-account-index') }}" class="nk-menu-link"><span class="nk-menu-text">Manage Request</span></a>
+        </li>
+        
+    </ul>
 </li>
 
 <li class="nk-menu-item has-sub">

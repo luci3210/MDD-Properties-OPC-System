@@ -5,78 +5,127 @@ namespace App\Http\Controllers\mdd\dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\mdd\Department;
-use DB;
+use App\Http\Controllers\mdd\dashboard\validateUser;
+use Illuminate\Support\Facades\Auth;
 
 class departmentcontroller extends Controller
 {
-    public function index($id='') {
+    protected $validateUser;
 
-        $data = DB::table('departments')
-            ->join('statuses', 'departments.status','=','statuses.id')->select('departments.*','statuses.name')->get();
+    public function __construct(validateUser $validateUser) {
 
-        $department = $this->listing();
+        $this->validateUser = $validateUser;
 
-        return view('mdd.pages.dashboard.manage_department.index',compact('data','department'));
     }
+
+    public function index() {
+
+        $this->validateUser->validateDepartmentAdmin(Auth::user()->department);
+
+        try {
+
+            $department = Department::join('statuses', 'departments.status','=','statuses.id')->select('departments.*','statuses.name as status_name')->get();
+
+            return view('mdd.pages.dashboard.manage_department.index',compact('department'));
+
+         } catch (\Exception $e) {
+
+            abort(404);
+        }
+    }
+
+    public function edit($id) {
+
+        $this->validateUser->validateDepartmentAdmin(Auth::user()->department);
+
+        try {
+            
+        $department = Department::join('statuses', 'departments.status','=','statuses.id')
+                ->where('departments.id',$id)->select('departments.*','statuses.name as status_name')->first();
+        return response()->json(['status' => 200,'department' => $department]);
+
+        } catch (\Exception $e) {
+
+            abort(404);
+        }
+        
+    }
+
+    public function update(Request $request) {
+            
+        $this->validateUser->validateDepartmentAdmin(Auth::user()->department);
+
+        try {
+
+            $request->validate(
+                [
+                    'the_id' => 'required|numeric',
+                    'the_department' => 'required',
+                    'the_status' => 'required|numeric',
+                ], 
+                [
+                    'the_id.required' => 'Somthing wrong with input value.',
+                    'the_id.numeric' => 'Somthing wrong with input value.',
+                    'the_department.required' => 'Somthing wrong with input value./Department',
+                    'the_status.required' => 'Somthing wrong with input value./status',
+                    'the_status.numeric' => 'Somthing wrong with input value./status',
+                ]
+            );
+            
+            $department = Department::findOrFail($request->the_id);
+
+            $department->update([
+                'department' => $request->the_department,
+                'status' => $request->the_status,
+                ]);
+            
+            return back()->with('success', 'Status details successfully updated.');
+
+        } catch (\Exception $e) {
+
+            abort(404);
+        }
+        
+    }
+    
 
     public function listing() {
 
-        try {
-
             return $listing = Department::join('statuses', 'departments.status','=','statuses.id')
-                ->where('statuses.name','=','Active')->select('departments.department','departments.id as ids','statuses.name')->get();
-
-        } catch (\Exception $e) {
-
-             return view('mdd.pages.error.404');
-        }
+                ->select('departments.*','statuses.name as status_name')->get();
     }
 
-    public function form_submit(Request $request) {
-            
-            $input = [
-            'department' => 'required|max:50',
-            'description' => 'required',
-            'icon' => 'required',
-            'status' => 'required|min:1|max:2'];
+    public function create(Request $request) {
 
-            $error = ['required' => '* Enter your :attribute'];
-
-            $this->validate($request, $input, $error);
+        $this->validateUser->validateDepartmentAdmin(Auth::user()->department);
 
         try {
 
-            Department::create([
-                'department' => $request->department,
-                    'description' => $request->description,
-                        'icon' => $request->icon,
-                            'status' => $request->status,
+            $request->validate( [
+                'the_department' => 'required',
+                'the_code' => 'required|numeric',
+                'the_status' => 'required|numeric'
+            ],
+            [
+                'the_code.required' => 'Somthing wrong with input value.',
+                'the_code.numeric' => 'Somthing wrong with input value.',
+                'the_department.required' => 'Somthing wrong with input value./Department',
+                'the_status.required' => 'Somthing wrong with input value./status',
+                'the_status.numeric' => 'Somthing wrong with input value./status',
+            ]);
+
+            $x = Department::create([
+                'department' => $request->the_department,
+                    'did' => $request->the_code,
+                        'status' => $request->the_status,
                 ]);
 
-             $notification = array(
-                'success' => "Information successfully save!",
-            );
-
-            return redirect()->route('manage-department-index')->with($notification);
+            return back()->with('success', 'Details successfully Added.');
 
         } catch (\Exception $e) {
 
-             return view('mdd.pages.error.404');
+            abort(404);
         }
     }
-
-    public function edit() {
-        return "sdsd";
-    }
-
-    public function update() {
-        return "sdsd";
-    }
-
-    public function delete() {
-        return "sdsd";
-    }
-
-
 
 }

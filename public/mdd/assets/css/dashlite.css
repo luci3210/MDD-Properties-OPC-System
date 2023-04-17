@@ -14740,7 +14740,12 @@ a:hover .btn-trigger:before {
   background: #2c3782;
 }
 .card-bordered {
-  border: 1px solid #dbdfea;
+  border: 1px solid #C27BA0;
+/*  background-color: #f8f1f5;*/
+}
+.card-table-bordered {
+  border: 1px solid #efefef;
+/*  background-color: #f8f1f5;*/
 }
 .card-bordered.is-dark {
   border-color: #2c3782;
@@ -29027,6 +29032,7 @@ body.nav-shown {
 }
 .nk-main {
   position: relative;
+  background-color: #f9f9f9;
 }
 .nk-wrap {
   display: flex;

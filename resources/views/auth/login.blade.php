@@ -12,6 +12,12 @@
             </div>
         @endif
 
+        @if ($message = Session::get('success'))
+        <div class="alert alert-fill alert-success alert-icon">
+            <em class="icon ni ni-check-circle"></em> <strong>Success</strong>. {{ $message }}
+        </div>
+    @endif 
+
         <form method="POST" action="{{ route('login') }}">
             @csrf
 

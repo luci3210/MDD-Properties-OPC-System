@@ -8,15 +8,10 @@
                     <div class="nk-split nk-split-page nk-split-md">
                         <div class="nk-split-content nk-block-area nk-block-area-column nk-auth-container bg-white w-lg-45">
                             <div class="nk-block nk-block-middle nk-auth-body">
-                                <div class="brand-logo pb-5">
-                                    <a href="html/index.html" class="logo-link">
-                                        <img class="logo-light logo-img logo-img-lg" src="{{ url('mdd/assets/images/logo.png') }}" srcset="{{ url('mdd/assets/images/logo2x.png 2x') }}" alt="logo">
-                                        <img class="logo-dark logo-img logo-img-lg" src="{{ url('mdd/assets/images/logo-dark.png') }}" srcset="{{ url('mdd/assets/images/logo-dark2x.png 2x') }}" alt="logo-dark">
-                                    </a>
-                                </div>
+                                
 <div class="nk-block-head">
     <div class="nk-block-head-content">
-        <h5 class="nk-block-title">Create New Account</h5>
+        <h4 class="nk-block-title">Create New Account</h4>
 
 
 @if ($message = Session::get('success'))
@@ -66,7 +61,7 @@
 </div>
 
 <div class="form-group">
-    <label class="form-label" for="email">Email or Username
+    <label class="form-label" for="email">Valid E-mail Address
         @error('email')                
         <span id="fv-sex-error" class="validate_input">{{ $message }}</span>
         @enderror
@@ -101,7 +96,8 @@
                                         <button class="btn btn-lg btn-primary btn-block">Register</button>
                                     </div>
                                 </form><!-- form -->
-                                <div class="form-note-s2 pt-4"> Already have an account ? <a href="html/pages/auths/auth-login-v3.html"><strong>Sign in instead</strong></a>
+                                <div class="form-note-s2 pt-4"> Already have an account ? 
+                                    <a href="{{ route('mdd-login') }}"><strong>Sign in instead</strong></a>
                                 </div>
                                 
                             </div><!-- .nk-block -->
@@ -112,7 +108,19 @@
                                 </div>
                             </div><!-- nk-block -->
                         </div><!-- nk-split-content -->
-                        <div class="nk-split-content nk-split-stretch bg-abstract"></div><!-- nk-split-content -->
+                        <div class="nk-split-content nk-split-stretch">
+                            
+                            <div class="mdd-name">
+                                <div class="brand-logo pb-4 text-center">
+                            <a href="html/index.html" class="logo-link">
+                                <img class="logo-light logo-img logo-img-lg" src="{{ url('mdd/assets/images/mdd-logo/logo.png') }}" srcset="./images/logo2x.png 2x" alt="logo">
+                                <img class="logo-dark logo-img logo-img-lg" src="{{ url('mdd/assets/images/mdd-logo/logo.png') }}" alt="logo-dark">
+                            </a>
+                        </div>
+                                <h3 style="color:#954195; margin-left: 10px;">MDD Properties OPC</h3>
+                            </div>
+                            
+                        </div><!-- nk-split-content -->
                     </div><!-- nk-split -->
                 </div>
                 <!-- wrap @e -->
@@ -122,124 +130,5 @@
 
 @endsection
 @section('mdd_rigth')
-<div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <a href="#" class="close" data-bs-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
-                <div class="modal-body modal-body-md">
-                    <h5 class="title mb-4">Select Your Country</h5>
-                    <div class="nk-country-region">
-                        <ul class="country-list text-center gy-2">
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ url('mdd/assets/images/flags/arg.png') }}" alt="" class="country-flag">
-                                    <span class="country-name">Argentina</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ url('mdd/assets/images/flags/aus.png') }}" alt="" class="country-flag">
-                                    <span class="country-name">Australia</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ url('mdd/assets/images/flags/bangladesh.png') }}" alt="" class="country-flag">
-                                    <span class="country-name">Bangladesh</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ url('mdd/assets/images/flags/canada.png') }}" alt="" class="country-flag">
-                                    <span class="country-name">Canada <small>(English)</small></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ url('mdd/assets/images/flags/china.png') }}" alt="" class="country-flag">
-                                    <span class="country-name">Centrafricaine</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ url('mdd/assets/images/flags/china.png') }}" alt="" class="country-flag">
-                                    <span class="country-name">China</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ url('mdd/assets/images/flags/french.png') }}" alt="" class="country-flag">
-                                    <span class="country-name">France</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ url('mdd/assets/images/flags/germany.png') }}" alt="" class="country-flag">
-                                    <span class="country-name">Germany</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ url('mdd/assets/images/flags/iran.png') }}" alt="" class="country-flag">
-                                    <span class="country-name">Iran</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ url('mdd/assets/images/flags/italy.png') }}" alt="" class="country-flag">
-                                    <span class="country-name">Italy</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ url('mdd/assets/images/flags/mexico.png') }}" alt="" class="country-flag">
-                                    <span class="country-name">México</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ url('mdd/assets/images/flags/philipine.png') }}" alt="" class="country-flag">
-                                    <span class="country-name">Philippines</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ url('mdd/assets/images/flags/portugal.png') }}" alt="" class="country-flag">
-                                    <span class="country-name">Portugal</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ url('mdd/assets/images/flags/s-africa.png') }}" alt="" class="country-flag">
-                                    <span class="country-name">South Africa</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ url('mdd/assets/images/flags/spanish.png') }}" alt="" class="country-flag">
-                                    <span class="country-name">Spain</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ url('mdd/assets/images/flags/switzerland.png') }}" alt="" class="country-flag">
-                                    <span class="country-name">Switzerland</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ url('mdd/assets/images/flags/uk.png') }}" alt="" class="country-flag">
-                                    <span class="country-name">United Kingdom</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ url('mdd/assets/images/flags/english.png') }}" alt="" class="country-flag">
-                                    <span class="country-name">United State</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div><!-- .modal-content -->
-        </div>
+
 @endsection

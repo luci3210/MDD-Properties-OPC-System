@@ -17,6 +17,12 @@
             font-size: 11px;
             font-style: italic;
         }
+        .mdd-name {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80%;;
+        }
     </style>
 </head>
 
@@ -27,9 +33,5 @@
 
     <script src="{{ url('mdd/assets/js/bundle.js?ver=3.1.2') }}"></script>
     <script src="{{ url('mdd/assets/js/scripts.js?ver=3.1.2') }}"></script>
-    
-    <div class="modal fade" tabindex="-1" role="dialog" id="region">
-        @yield('mdd_rigth')
-    </div>
 </body>
 </html>

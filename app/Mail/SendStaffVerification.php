@@ -13,12 +13,11 @@ class SendStaffVerification extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct()
+    protected $user;
+    
+    public function __construct($user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -40,8 +39,20 @@ class SendStaffVerification extends Mailable
     {
         return new Content(
             view: 'mdd.pages.email.request_account',
-        );
+            with:['id' => $this->user,
+                    'uqid' => $this->user,
+                    ],
+                );
     }
+
+
+ // return new Content(
+ //            view: 'mdd.pages.email.request_account',
+ //        )->with([
+ //                        'id' => $this->user->id,
+ //                        'hash' => $this->user->hash,
+ //                    ]);
+
 
     /**
      * Get the attachments for the message.

@@ -8,9 +8,10 @@ use App\Http\Controllers\mdd\dashboard\departmentcontroller;
 use App\Http\Controllers\mdd\dashboard\statuscontroller;
 use App\Http\Controllers\mdd\dashboard\myemailcontroller;
 use App\Http\Controllers\mdd\dashboard\generateuqid;
+use App\Http\Controllers\mdd\dashboard\validateUser;
 use App\Http\Livewire\Manage\ManageStatus;
 use App\Http\Livewire\Manage\ManageComponentStatus;
-
+use App\Http\Controllers\mdd\ppauth\AuthLoginController;
 
 
 /*
@@ -40,14 +41,33 @@ Route::middleware([
     })->name('dashboard');
 });
 
-// ----------------------- private_auth --------------------------------
+// ----------------------- LOGIN --------------------------------
 
-Route::controller(AuthController::class)->group(function () {
-
-    Route::get('mdd-properties/js/register','register')->name('private_register');
-    Route::post('mdd-properties/js/register_submit','register_submit')->name('private_register.submit');
+Route::controller(AuthLoginController::class)->group(function () {
+    Route::get('mdd-properties/staff/login','login')->name('mdd-login');
+    Route::post('mdd-properties/staff/login-validate','login_validate')->name('mdd-validate-login');
+    Route::get('mdd-properties/staff/login-validate','attemp_login_validate')->name('attemp-mdd-validate-login');
 
 });
+
+// ----------------------- REGISTER/--------------------------------
+
+Route::controller(AuthController::class)->group(function () {
+    Route::get('mdd-properties/staff/register','register')->name('staff_register');
+    Route::post('mdd-properties/js/register_submit','register_submit')->name('private_register.submit');
+    Route::get('mdd-properties/mdd-staff/{id}/{uqid}','staffVerifyEmail')->name('mdd-staff');
+});
+
+
+
+
+Route::controller(validateUser::class)->group(function () {
+
+    Route::get('auth','validateDepartment')->name('authd');
+
+});
+
+
 
 
 Route::prefix('mdd-properties-opc/dashboard/')->group(function(){
@@ -77,9 +97,10 @@ Route::prefix('mdd-properties/dashboard/jsx/manage-user')->group(function(){
             ->group(function() {
 
                 Route::get('request-account-index','request_account')->name('mu.request-account-index');
-                Route::get('request-account-edit/{id}','request_account_edit')->name('mu.request-account-edit');
-                Route::post('request-account-move','request_account_move')->name('mu.request-account-move');
-                Route::post('request-account-delete','request_account_delete')->name('mu.request-account-delete');
+                Route::get('request-account-update/{id}','edit_request_account')->name('mu-edit-equest-account');
+                Route::post('request-account-move','request_account_move')->name('mu-request-account-move');
+
+                Route::post('request-account-delete','request_account_delete')->name('mu-request-account-delete');
 
                 Route::get('user-list','user_index')->name('mu.user-index');
                 Route::get('user-edit/{id}','user_edit')->name('mu.user-edit');
@@ -107,10 +128,9 @@ Route::prefix('mdd-properties/dashboard/jsx/manage-department')->group(function(
             ->group(function() {
 
                 Route::get('index','index')->name('manage-department-index');
-                Route::post('submitaa','form_submit')->name('manage-department-submit');
-                // Route::post('index','edit')->name('md.edit');
-                // Route::post('index','update')->name('md.update');
-                // Route::post('index','delete')->name('md.delete');
+                Route::post('create','create')->name('md-create');
+                Route::get('edit/{id}','edit')->name('md-edit');
+                Route::post('update','update')->name('md-update');
 
     });
 });

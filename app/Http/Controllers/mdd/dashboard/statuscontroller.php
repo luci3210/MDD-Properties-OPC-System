@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\mdd\dashboard;
 
+use App\Http\Controllers\mdd\dashboard\validateUser;
 use Yajra\DataTables\Facades\Datatables;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,7 +14,20 @@ use Illuminate\Support\Str;
 
 class statuscontroller extends Controller
 {
+
+    protected $validateUser;
+
+    public function __construct(validateUser $validateUser) {
+
+        // $user = 2;
+
+        $this->validateUser = $validateUser;
+        
+    }
+
     public function index() {
+
+        $this->validateUser->validateDepartment(Auth::user()->department);
 
         $statuses = Status::all(); 
         return view('mdd.pages.dashboard.manage_status.index',compact('statuses'));

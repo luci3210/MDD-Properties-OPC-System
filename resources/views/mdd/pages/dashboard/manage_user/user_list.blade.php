@@ -151,7 +151,7 @@
                 <h5 class="modal-title">Update User</h5>
             </div>
 
-<form action="{{ route('mu.request-account-move') }}" method="POST" id="ValidateUpdateRequest">
+<form action="" method="POST" id="ValidateUpdateRequest">
     @csrf
 <div class="modal-body">
 

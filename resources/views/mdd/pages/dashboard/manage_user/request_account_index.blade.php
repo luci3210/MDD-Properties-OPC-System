@@ -10,13 +10,12 @@
 <div class="nk-block-head nk-block-head-sm">
     <div class="nk-block-between g-3">
         <div class="nk-block-head-content">
-            <h3 class="nk-block-title page-title">Manage User / Request account</h3>
-            <div class="nk-block-des text-soft">
-                <p> <span style="color:red;">(For Verification)</span></p>
-            </div>
+             <h3 class="nk-block-title page-title">Manage User<span style="font-size:18px; margin-left: 10px;color: #a3a3a3;"> - Request Account</span></h3>
+
         </div>
     </div>
 
+<div style="margin-top:10px;margin-bottom: -10px;">
     @if ($message = Session::get('success'))
         <div class="alert alert-fill alert-success alert-icon">
             <em class="icon ni ni-check-circle"></em> <strong>Success</strong>. {{ $message }}
@@ -29,99 +28,46 @@
         </div>
     @endif
 </div>
+</div>
 
 <div class="nk-block">
-    <div class="card card-bordered card-stretch">
+    <div class="card card-table-bordered card-stretch">
         <div class="container-fluid">
-            <div style="margin-top:10px; margin-left: 5px; margin-right: 5px;">
+            <div style="margin-top:10px; margin-left: 5px; margin-right: 5px;margin-bottom: 10px;">
 
-<table class="table table-tranx">
-    <thead>
-        <tr class="tb-tnx-head">
-            <th class="tb-tnx-id"><span class="">#</span></th>
-            <th class="tb-tnx-info">
-                <span class="tb-tnx-desc d-none d-sm-inline-block">
-                    <span>Full Name</span>
-                </span>
-            </th>
-            <th class="tb-tnx-info">
-                <span class="tb-tnx-desc d-none d-sm-inline-block">
-                    <span>Department</span>
-                </span>
-            </th>
+<table class="table table-hover">
+  <thead class="table-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Department</th>
+      <th scope="col">Email</th>
+      <th scope="col">Date</th>
+      <th scope="col" class="text-center">Action</th>
+    </tr>
+  </thead>
 
-            <th class="tb-tnx-info">
-                <span class="tb-tnx-desc d-none d-sm-inline-block">
-                    Email
-                </span>
-            </th>
+  <tbody>
+    @foreach($data as $details)
+    <tr style="font-size:13px;">
+      <th scope="row">{{ $loop->index + 1 }}</th>
+      <td>{{ $details->name }}</td>
+      <td>{{ $details->department }}</td>
+      <td>{{ $details->email }}</td>
+      <td>{{ $details->created_at }}</td>
+      <td style="width:200px;text-align: center;">
+        <button type="button"  value="{{ $details->id }}" class="btn btn-sm btn-outline-primary ActionEdit">Update</button>
+        <button type="button"  value="{{ $details->id }}" class="btn btn-sm btn-outline-danger ActionDelete">Delete</button>
+      </td>
+    </tr>
+    @endforeach
+  </tbody>
 
-            <th class="tb-tnx-info">
-                <span class="tb-tnx-desc d-none d-sm-inline-block">
-                    Status
-                </span>
-            </th>
-
-            <th class="tb-tnx-info">
-                <span class="tb-tnx-desc d-none d-sm-inline-block">
-                    Days
-                </span>
-            </th>
-
-            <th class="tb-tnx-info text-center" style="width:200px;">
-                <span class="tb-tnx-desc">
-                    Action
-                </span>
-            </th>
-        </tr>
-    </thead>
-
-    <tbody>
-        @foreach($data as $details)
-        <tr class="tb-tnx-item">
-            <td class="tb-tnx-id">
-                {{ $loop->index + 1 }}
-            </td>
-            
-            <td class="tb-tnx-info">
-                <div class="tb-tnx-desc">
-                    <span class="title">{{ $details->name }}</span>
-                </div>
-            </td>
-
-            <td class="tb-tnx-info">
-                <div class="tb-tnx-desc">
-                    <span class="title">{{ $details->department }}</span>
-                </div>
-            </td>
-
-             <td class="tb-tnx-info">
-                <div class="tb-tnx-desc">
-                    <span class="title">{{ $details->id }}</span>
-                </div>
-            </td>
-
-            <td class="tb-tnx-info">
-                <div class="tb-tnx-desc">
-                    <span class="title">{{ $details->created_at }}</span>
-                </div>
-            </td>
-
-            <td class="tb-tnx-info">
-                <div class="tb-tnx-desc">
-                    <span class="title">2 Days</span>
-                </div>
-            </td>
-            
-            <td class="tb-tnx-info text-center">
-                <a href="{{ route('mu.request-account-edit',$details->uqid) }}" class="btn btn-sm btn-outline-primary">Edit</a>
-                <button type="button" value="{{ $details->id }}" class="btn btn-sm btn-outline-danger modReqDelete">Delete</button>
-            </td>
-        </tr>
-        @endforeach()
-    </tbody>
 </table>
 
+
+
+
             </div>
         </div>
     </div>
@@ -134,61 +80,65 @@
 </div>
 
 
-
-<!-- edit modal!-->
-
-<div class="modal fade zoom" tabindex="-1" id="editReqModal">
+{{-- ----------------- update ------------- --}}
+<div class="modal fade zoom" tabindex="-1" id="EditModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
                 <em class="icon ni ni-cross"></em>
             </a>
             <div class="modal-header">
-                <h5 class="modal-title">Update User Request Account</h5>
+                <h5 class="modal-title">Update Request Account</h5>
             </div>
 
-<form action="{{ route('mu.request-account-move') }}" method="POST" id="ValidateUpdateRequest">
+<form action="{{ route('mu-request-account-move') }}" method="POST">
     @csrf
 <div class="modal-body">
 
-<div style="margin-bottom:10px">
-    <input type="hidden" class="form-control" id="id" name="id" required>
-    <strong>Full Name : </strong> <span id="the_fullname"></span>
+<div class="form-group">
+    <label class="form-label">Name</label>
+    <div class="form-control-wrap">
+        <input type="hidden" class="form-control" id="the_id" name="the_id"  value="">
+        <input type="text" class="form-control" id="the_name"  disabled>
+    </div>
 </div>
-
-<div style="margin-bottom:10px">
-    <strong>E-mail : </strong> <span id="the_email"></span> 
-</div>
-
-
-<div style="margin-bottom:10px">
-    <strong>Department :</strong> <span id="the_department"></span>
-</div>
-
-
-<div style="margin-bottom:10px">
-    <strong>Date Create : </strong> <span id="the_created"></span>
-</div>
-
-<hr>
 
 
 <div class="form-group">
-<label class="form-label">Select Department</label>
-<div class="form-control-wrap">
-    <select class="form-select" name="department">
-        <option label="Select Department" value="" > Select Department </option>
-        @foreach($department as $listing)
-            <option value="{{ $listing->ids }}">{{ $listing->department }}</option>
-        @endforeach
-    </select>
+    <label class="form-label">Email</label>
+    <div class="form-control-wrap">
+        <input type="text" class="form-control" id="the_email" disabled>
+    </div>
+</div>
+
+
+<div class="form-group">
+<label class="form-label" for="default-06">Department (Current - <span id="the_department" style="color:red;"></span>)</label>
+<div class="form-control-wrap ">
+    <div class="form-control-select">
+        <select class="form-control" id="default-06" name="the_department">
+            <option value="">-Select Status-</option>
+            @foreach($department as $dept)
+            <option value="{{ $dept['did'] }}">{{ $dept['department'] }}</option>
+            @endforeach
+        </select>
+    </div>
 </div>
 </div>
+
+
+<div class="form-group">
+    <label class="form-label">Date Created</label>
+    <div class="form-control-wrap">
+        <input type="text" class="form-control" id="the_created_at"  disabled>
+    </div>
+</div>
+
 
 
 </div>
 <div class="modal-footer bg-light">
-    <button type="submit" class="btn btn-primary" id="SaveInfo">Update Information</button>
+    <button type="submit" class="btn btn-primary">Update Information</button>
 </div>
 
 </form>
@@ -196,54 +146,68 @@
         </div>
     </div>
 </div>
-
-<!-- end of edit modal!-->
-
+{{-- -----------------------end----------------------- --}}
 
 
 <!-- delete modal!-->
-
-<div class="modal fade zoom" tabindex="-1" id="deleteReqModal">
+<div class="modal fade zoom" tabindex="-1" id="DeleteModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
                 <em class="icon ni ni-cross"></em>
             </a>
             <div class="modal-header">
-                <h5 class="modal-title">Delete Request Account</h5>
+                <h5 class="modal-title text-danger">Delete Account?</h5>
             </div>
 
-<form action="{{ route('mu.request-account-delete') }}" method="POST">
+<form action="{{ route('mu-request-account-delete') }}" method="POST">
     @csrf
 <div class="modal-body">
 
-<div class="alert-text">
-    <h6 class="text-danger">Are you sure you want to delete?</h6>
-</div><br>
-
-<div style="margin-bottom:10px">
-    <input type="hidden" class="form-control" id="del_id" name="del_id" required>
-    <strong>Full Name : </strong> <span id="del_fullname"></span>
-</div>
-
-<div style="margin-bottom:10px">
-    <strong>E-mail : </strong> <span id="del_email"></span> 
+<div class="form-group">
+    <label class="form-label">Name</label>
+    <div class="form-control-wrap">
+        <input type="hidden" class="form-control" id="del_id" name="del_id"  value="">
+        <input type="text" class="form-control" id="del_name"  disabled>
+    </div>
 </div>
 
 
-<div style="margin-bottom:10px">
-    <strong>Department :</strong> <span id="del_department"></span>
+<div class="form-group">
+    <label class="form-label">Email</label>
+    <div class="form-control-wrap">
+        <input type="text" class="form-control" id="del_email" disabled>
+    </div>
 </div>
 
 
-<div style="margin-bottom:10px">
-    <strong>Date Create : </strong> <span id="del_created"></span>
+<div class="form-group">
+<label class="form-label" for="default-06">Department (Current - <span id="del_department" style="color:red;"></span>)</label>
+<div class="form-control-wrap ">
+    <div class="form-control-select">
+        <select class="form-control" id="default-06" disabled>
+            <option value="">-Select Status-</option>
+            @foreach($department as $dept)
+            <option value="{{ $dept['did'] }}">{{ $dept['department'] }}</option>
+            @endforeach
+        </select>
+    </div>
 </div>
+</div>
+
+
+<div class="form-group">
+    <label class="form-label">Date Created</label>
+    <div class="form-control-wrap">
+        <input type="text" class="form-control" id="del_created_at"  disabled>
+    </div>
+</div>
+
 
 
 </div>
 <div class="modal-footer bg-light">
-    <button type="submit" class="btn btn-danger">Delete Information</button>
+    <button type="submit" class="btn btn-danger">Confirm</button>
 </div>
 
 </form>
@@ -258,44 +222,45 @@
 <script type="text/javascript">
 
 $(document).ready(function () {
-$(document).on('click','.modReqEdit', function() { let ids = $(this).val();
+$(document).on('click','.ActionEdit', function() { 
 
-    $('#editReqModal').modal('show');
+    let ids = $(this).val();
+
+    $('#EditModal').modal('show');
+
     $.ajax({
-        type: "GET",
-        url: "http://127.0.0.1:8000/mdd-properties/dashboard/jsx/manage-user/request-account-edit/"+ids,
-        success: function(response) {
-            $('#id').val(response.data.id);
 
-            document.getElementById('the_fullname').innerText = response.data.name;
-            $('#thefullname').val(response.data.name);
-            document.getElementById('the_email').innerText = response.data.email;
-            $('#thefullname').val(response.data.name);
-            document.getElementById('the_department').innerText = response.data.dep_name;
-            $('#thefullname').val(response.data.name);
-            document.getElementById('the_created').innerText = response.data.created_at;
-            $('#thefullname').val(response.data.name);
+        type: "GET",
+        url: "http://127.0.0.1:8000/mdd-properties/dashboard/jsx/manage-user/request-account-update/"+ids,
+        success: function(response) {
+            $('#the_id').val(response.user_request.id);
+            $('#the_name').val(response.user_request.name);
+            $('#the_email').val(response.user_request.email);
+            document.getElementById('the_department').innerText = response.user_request.department_name;
+            $('#the_created_at').val(response.user_request.created_at);
         }
     });
 });
 });
 
 
-
 $(document).ready(function () {
-$(document).on('click','.modReqDelete', function() { let ids = $(this).val();
+$(document).on('click','.ActionDelete', function() { 
 
-    $('#deleteReqModal').modal('show');
+    let ids = $(this).val();
+
+    $('#DeleteModal').modal('show');
+
     $.ajax({
-        type: "GET",
-        url: "http://127.0.0.1:8000/mdd-properties/dashboard/jsx/manage-user/request-account-edit/"+ids,
-        success: function(response) {
-            $('#del_id').val(response.data.id);
 
-            document.getElementById('del_fullname').innerText = response.data.name;
-            document.getElementById('del_email').innerText = response.data.email;
-            document.getElementById('del_department').innerText = response.data.dep_name;
-            document.getElementById('del_created').innerText = response.data.created_at;
+        type: "GET",
+        url: "http://127.0.0.1:8000/mdd-properties/dashboard/jsx/manage-user/request-account-update/"+ids,
+        success: function(response) {
+            $('#del_id').val(response.user_request.id);
+            $('#del_name').val(response.user_request.name);
+            $('#del_email').val(response.user_request.email);
+            document.getElementById('del_department').innerText = response.user_request.department_name;
+            $('#del_created_at').val(response.user_request.created_at);
         }
     });
 });

@@ -39,38 +39,40 @@
 
             <div class="row gy-4">
                 <div class="col-sm-6">
+                <form action="{{ route('mu.request-account-move',$data['uqid']) }}" method="POST">
+                    @csrf
                     <div class="form-group">
                         <label class="form-label" for="default-01">Full Name</label>
                         <div class="form-control-wrap">
-                            <input type="text" class="form-control" id="default-01" placeholder="Full Name">
+                            <input type="text" class="form-control" value="{{ $data['name'] }}" id="default-01" placeholder="Full Name">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="form-label" for="default-01">Department</label>
                         <div class="form-control-wrap">
-                            <input type="text" class="form-control" id="default-01" placeholder="Department">
+                            <input type="text" class="form-control" name="department" value="2"  id="default-01" placeholder="Department">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="form-label" for="default-01">E-mail</label>
                         <div class="form-control-wrap">
-                            <input type="text" class="form-control" id="default-01" placeholder="E-mail">
+                            <input type="text" class="form-control" value="{{ $data['email'] }}" id="default-01" placeholder="E-mail">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="form-label" for="default-01">Status and Days</label>
                         <div class="form-control-wrap">
-                            <input type="text" class="form-control" id="default-01" placeholder="Status and Days">
+                            <input type="text" class="form-control" value="{{ $data['dep_name'] }}" id="default-01" placeholder="Status and Days">
                         </div>
-                    </div>
+                    </div> 
 
                     <hr class="preview-hr">
 
     <button type="submit" class="btn btn-primary" id="SaveInfo">Update Information</button>
-
+            </form>
                 </div>
 
             </div>
