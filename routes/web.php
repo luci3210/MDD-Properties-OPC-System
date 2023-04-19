@@ -157,6 +157,11 @@ Route::prefix('mdd-properties/dashboard/jsx/managestaff')->group(function() {
                 Route::get('locations','locations')->name('ms-location');
                 Route::post('locations-province-new','locations_new')->name('ms-location-new');
                 Route::get('locations-province-edit/{id}','locations_edit')->name('ms-location-edit');
+                Route::post('locations-province-update','location_provinces_update')->name('ms-location_provinces_update');
+                Route::get('locations-province-delete/{id}','location_provinces_delete')->name('ms-location_provinces_delete');
+                Route::post('locations-province-deleted','location_provinces_deleted')->name('ms-location_provinces_deleted');
+
+
     });
 });
 

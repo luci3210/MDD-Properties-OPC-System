@@ -26,9 +26,15 @@
 </div>
 @endif 
 
+@if ($message = Session::get('deleted'))
+<div class="alert alert-fill alert-success alert-icon">
+    <em class="icon ni ni-check-circle text-danger"></em> <span class="text-danger"><strong>Delete</strong>. {{ $message }}</span>
+</div>
+@endif 
+
 @if ($errors->any())
     <div class="alert alert-fill alert-danger alert-icon">
-    <em class="icon ni ni-check-circle"></em> <strong>Whoops!</strong>  There were some problems with your input.
+    <em class="icon ni ni-check-circle text-danger"></em> <span class="text-danger"> <strong>Whoops!</strong>  There were some problems with your input.</span>
 </div>
 @endif
 </div>
@@ -139,7 +145,7 @@
                 <h5 class="modal-title">New Province</h5>
             </div>
 
-<form action="{{ route('ms-location-new') }}" method="POST">
+<form action="{{ route('ms-location_provinces_update') }}" method="POST">
     @csrf
 <div class="modal-body">
 
@@ -155,7 +161,7 @@
 <label class="form-label" for="default-06">Status  (Current - <span id="the_edit_status" style="color:red;"></span>)</label>
 <div class="form-control-wrap ">
     <div class="form-control-select">
-        <select class="form-control" id="default-06" name="the_status">
+        <select class="form-control" id="default-06" name="the_edit_status">
             <option value="">-Select Status-</option>
             @foreach($status_list as $stat)
             <option value="{{ $stat['id'] }}">{{ $stat['name'] }}</option>
@@ -167,7 +173,7 @@
 
 </div>
 <div class="modal-footer bg-light">
-    <button type="submit" class="btn btn-primary">Save Information</button>
+    <button type="submit" class="btn btn-primary">Update Information</button>
 </div>
 
 </form>
@@ -176,7 +182,41 @@
     </div>
 </div>
 
-<!-- end of delete modal!-->
+<!-- end!-->
+
+
+<!-- delete modal!-->
+<div class="modal fade zoom" tabindex="-1" id="ActionDeleteProvinceModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <em class="icon ni ni-cross"></em>
+            </a>
+            <div class="modal-header">
+                <h5 class="modal-title text-danger">Are you sure you want to delete?</h5>
+            </div>
+
+<form action="{{ route('ms-location_provinces_deleted') }}" method="POST">
+    @csrf
+<div class="modal-body">
+ <input type="hidden" class="form-control" id="the_delete_id" name="the_delete_id" >
+
+<h4 id="the_delete_province"></h4>
+
+
+
+</div>
+<div class="modal-footer bg-light">
+    <button type="submit" class="btn btn-danger">Delete Information</button>
+</div>
+
+</form>
+
+        </div>
+    </div>
+</div>
+
+<!-- end!-->
 
 <script type="text/javascript">
 
@@ -214,18 +254,15 @@ $(document).on('click','.ActionDelete', function() {
 
     let ids = $(this).val();
 
-    $('#DeleteModal').modal('show');
+    $('#ActionDeleteProvinceModal').modal('show');
 
     $.ajax({
 
         type: "GET",
-        url: "http://127.0.0.1:8000/mdd-properties/dashboard/jsx/manage-user/request-account-update/"+ids,
+        url: "http://127.0.0.1:8000/mdd-properties/dashboard/jsx/managestaff/locations-province-delete/"+ids,
         success: function(response) {
-            $('#del_id').val(response.user_request.id);
-            $('#del_name').val(response.user_request.name);
-            $('#del_email').val(response.user_request.email);
-            document.getElementById('del_department').innerText = response.user_request.department_name;
-            $('#del_created_at').val(response.user_request.created_at);
+            $('#the_delete_id').val(response.provice.id);
+            document.getElementById('the_delete_province').innerText = response.provice.province;
         }
     });
 });
