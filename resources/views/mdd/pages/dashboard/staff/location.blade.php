@@ -15,7 +15,7 @@
 
 
 <div class="nk-block-head-content">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNew">New</button>
+    <button type="button" class="btn btn-primary ActionNewProvince">New</button>
 </div>
 
 </div>
@@ -42,29 +42,25 @@
   <thead class="table-light">
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Department</th>
-      <th scope="col">Email</th>
-      <th scope="col">Date</th>
+      <th scope="col">Provice</th>
+      <th scope="col">Status</th>
       <th scope="col" class="text-center">Action</th>
     </tr>
   </thead>
 
-{{--   <tbody>
-    @foreach($data as $details)
+<tbody>
+    @foreach($provice_list as $details)
     <tr style="font-size:13px;">
       <th scope="row">{{ $loop->index + 1 }}</th>
+      <td>{{ $details->province }}</td>
       <td>{{ $details->name }}</td>
-      <td>{{ $details->department }}</td>
-      <td>{{ $details->email }}</td>
-      <td>{{ $details->created_at }}</td>
       <td style="width:200px;text-align: center;">
         <button type="button"  value="{{ $details->id }}" class="btn btn-sm btn-outline-primary ActionEdit">Update</button>
         <button type="button"  value="{{ $details->id }}" class="btn btn-sm btn-outline-danger ActionDelete">Delete</button>
       </td>
     </tr>
     @endforeach
-  </tbody> --}}
+  </tbody>
 
 </table>
 
@@ -83,65 +79,45 @@
 </div>
 
 
-{{-- ----------------- update ------------- --}}
-<div class="modal fade zoom" tabindex="-1" id="EditModal">
+{{-- ----------------- ADD LOCATION ------------- --}}
+<div class="modal fade zoom" tabindex="-1" id="ActionNewProvinceModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
                 <em class="icon ni ni-cross"></em>
             </a>
             <div class="modal-header">
-                <h5 class="modal-title">Update Request Account</h5>
+                <h5 class="modal-title">New Province</h5>
             </div>
 
-<form action="{{ route('mu-request-account-move') }}" method="POST">
+<form action="{{ route('ms-location-new') }}" method="POST">
     @csrf
 <div class="modal-body">
 
 <div class="form-group">
-    <label class="form-label">Name</label>
+    <label class="form-label">Province Name</label>
     <div class="form-control-wrap">
-        <input type="hidden" class="form-control" id="the_id" name="the_id"  value="">
-        <input type="text" class="form-control" id="the_name"  disabled>
+        <input type="text" class="form-control" name="the_province" >
     </div>
 </div>
-
 
 <div class="form-group">
-    <label class="form-label">Email</label>
-    <div class="form-control-wrap">
-        <input type="text" class="form-control" id="the_email" disabled>
-    </div>
-</div>
-
-
-{{-- <div class="form-group">
-<label class="form-label" for="default-06">Department (Current - <span id="the_department" style="color:red;"></span>)</label>
+<label class="form-label" for="default-06">Status</label>
 <div class="form-control-wrap ">
     <div class="form-control-select">
-        <select class="form-control" id="default-06" name="the_department">
+        <select class="form-control" id="default-06" name="the_status">
             <option value="">-Select Status-</option>
-            @foreach($department as $dept)
-            <option value="{{ $dept['did'] }}">{{ $dept['department'] }}</option>
+            @foreach($status_list as $stat)
+            <option value="{{ $stat['id'] }}">{{ $stat['name'] }}</option>
             @endforeach
         </select>
     </div>
 </div>
-</div> --}}
-
-
-<div class="form-group">
-    <label class="form-label">Date Created</label>
-    <div class="form-control-wrap">
-        <input type="text" class="form-control" id="the_created_at"  disabled>
-    </div>
 </div>
-
-
 
 </div>
 <div class="modal-footer bg-light">
-    <button type="submit" class="btn btn-primary">Update Information</button>
+    <button type="submit" class="btn btn-primary">Save Information</button>
 </div>
 
 </form>
@@ -152,65 +128,46 @@
 {{-- -----------------------end----------------------- --}}
 
 
-<!-- delete modal!-->
-<div class="modal fade zoom" tabindex="-1" id="DeleteModal">
+<!-- edit modal!-->
+<div class="modal fade zoom" tabindex="-1" id="ActionEditProvinceModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
                 <em class="icon ni ni-cross"></em>
             </a>
             <div class="modal-header">
-                <h5 class="modal-title text-danger">Delete Account?</h5>
+                <h5 class="modal-title">New Province</h5>
             </div>
 
-<form action="{{ route('mu-request-account-delete') }}" method="POST">
+<form action="{{ route('ms-location-new') }}" method="POST">
     @csrf
 <div class="modal-body">
 
 <div class="form-group">
-    <label class="form-label">Name</label>
+    <label class="form-label">Province Name</label>
     <div class="form-control-wrap">
-        <input type="hidden" class="form-control" id="del_id" name="del_id"  value="">
-        <input type="text" class="form-control" id="del_name"  disabled>
+        <input type="hidden" class="form-control" id="the_edit_id" name="the_edit_id" >
+        <input type="text" class="form-control" id="the_edit_province" name="the_edit_province" >
     </div>
 </div>
-
 
 <div class="form-group">
-    <label class="form-label">Email</label>
-    <div class="form-control-wrap">
-        <input type="text" class="form-control" id="del_email" disabled>
-    </div>
-</div>
-
-
-{{-- <div class="form-group">
-<label class="form-label" for="default-06">Department (Current - <span id="del_department" style="color:red;"></span>)</label>
+<label class="form-label" for="default-06">Status  (Current - <span id="the_edit_status" style="color:red;"></span>)</label>
 <div class="form-control-wrap ">
     <div class="form-control-select">
-        <select class="form-control" id="default-06" disabled>
+        <select class="form-control" id="default-06" name="the_status">
             <option value="">-Select Status-</option>
-            @foreach($department as $dept)
-            <option value="{{ $dept['did'] }}">{{ $dept['department'] }}</option>
+            @foreach($status_list as $stat)
+            <option value="{{ $stat['id'] }}">{{ $stat['name'] }}</option>
             @endforeach
         </select>
     </div>
 </div>
-</div> --}}
-
-
-<div class="form-group">
-    <label class="form-label">Date Created</label>
-    <div class="form-control-wrap">
-        <input type="text" class="form-control" id="del_created_at"  disabled>
-    </div>
 </div>
-
-
 
 </div>
 <div class="modal-footer bg-light">
-    <button type="submit" class="btn btn-danger">Confirm</button>
+    <button type="submit" class="btn btn-primary">Save Information</button>
 </div>
 
 </form>
@@ -221,26 +178,31 @@
 
 <!-- end of delete modal!-->
 
-
 <script type="text/javascript">
+
+$(document).ready(function () {
+$(document).on('click','.ActionNewProvince', function() { 
+    $('#ActionNewProvinceModal').modal('show');
+});
+});
+
 
 $(document).ready(function () {
 $(document).on('click','.ActionEdit', function() { 
 
     let ids = $(this).val();
 
-    $('#EditModal').modal('show');
+    $('#ActionEditProvinceModal').modal('show');
 
     $.ajax({
 
         type: "GET",
-        url: "http://127.0.0.1:8000/mdd-properties/dashboard/jsx/manage-user/request-account-update/"+ids,
+
+        url: "http://127.0.0.1:8000/mdd-properties/dashboard/jsx/managestaff/locations-province-edit/"+ids,
         success: function(response) {
-            $('#the_id').val(response.user_request.id);
-            $('#the_name').val(response.user_request.name);
-            $('#the_email').val(response.user_request.email);
-            document.getElementById('the_department').innerText = response.user_request.department_name;
-            $('#the_created_at').val(response.user_request.created_at);
+            $('#the_edit_id').val(response.provice.id);
+            $('#the_edit_province').val(response.provice.province);
+            document.getElementById('the_edit_status').innerText = response.provice.name;
         }
     });
 });

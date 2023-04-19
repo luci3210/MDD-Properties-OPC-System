@@ -155,6 +155,8 @@ Route::prefix('mdd-properties/dashboard/jsx/managestaff')->group(function() {
         ->controller(locationcontroller::class)
             ->group(function() {
                 Route::get('locations','locations')->name('ms-location');
+                Route::post('locations-province-new','locations_new')->name('ms-location-new');
+                Route::get('locations-province-edit/{id}','locations_edit')->name('ms-location-edit');
     });
 });
 
