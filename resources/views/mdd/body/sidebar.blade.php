@@ -139,10 +139,13 @@
     </a>
     <ul class="nk-menu-sub">
         <li class="nk-menu-item">
-            <a href="html/customer-list.html" class="nk-menu-link"><span class="nk-menu-text">Customer List</span></a>
+            <a href="html/customer-list.html" class="nk-menu-link"><span class="nk-menu-text">Banner</span></a>
         </li>
         <li class="nk-menu-item">
-            <a href="html/customer-details.html" class="nk-menu-link"><span class="nk-menu-text">Customer Details</span></a>
+            <a href="{{ route('ms-location') }}" class="nk-menu-link"><span class="nk-menu-text">Location</span></a>
+        </li>
+        <li class="nk-menu-item">
+            <a href="html/customer-details.html" class="nk-menu-link"><span class="nk-menu-text">Product</span></a>
         </li>
     </ul><!-- .nk-menu-sub -->
 </li><!-- .nk-menu-item -->

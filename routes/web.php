@@ -9,6 +9,7 @@ use App\Http\Controllers\mdd\dashboard\statuscontroller;
 use App\Http\Controllers\mdd\dashboard\myemailcontroller;
 use App\Http\Controllers\mdd\dashboard\generateuqid;
 use App\Http\Controllers\mdd\dashboard\validateUser;
+use App\Http\Controllers\mdd\dashboard\locationcontroller;
 use App\Http\Livewire\Manage\ManageStatus;
 use App\Http\Livewire\Manage\ManageComponentStatus;
 use App\Http\Controllers\mdd\ppauth\AuthLoginController;
@@ -66,7 +67,6 @@ Route::controller(validateUser::class)->group(function () {
     Route::get('auth','validateDepartment')->name('authd');
 
 });
-
 
 
 
@@ -145,6 +145,16 @@ Route::prefix('mdd-properties/dashboard/jsx/managestatus')->group(function(){
                 Route::post('status-form-create','status_form_create')->name('status-form-create');
                 Route::post('status-form-update','status_form_update')->name('status-form-update');
                 Route::post('status-form-delete','status_form_delete')->name('status-form-delete');
+    });
+});
+
+
+// MANAGE STAFF
+Route::prefix('mdd-properties/dashboard/jsx/managestaff')->group(function() {
+    Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
+        ->controller(locationcontroller::class)
+            ->group(function() {
+                Route::get('locations','locations')->name('ms-location');
     });
 });
 
