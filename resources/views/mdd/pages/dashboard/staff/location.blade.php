@@ -10,12 +10,16 @@
 <div class="nk-block-head nk-block-head-sm">
 <div class="nk-block-between g-3">
     <div class="nk-block-head-content">
-        <h3 class="nk-block-title page-title">Dep IT Staff <span style="font-size:18px; margin-left: 10px;color: #a3a3a3;"> - Locations</span></h3>
+        <h5 class="nk-block-title page-title">Dep IT Staff <span style="font-size:18px; margin-left: 10px;color: #a3a3a3;"> - Locations</span></h5>
     </div>
 
 
 <div class="nk-block-head-content">
-    <button type="button" class="btn btn-primary ActionNewProvince">New</button>
+    <div class="btn-group btn-group-sm" aria-label="Basic example">
+      <button type="button" class="btn btn-primary ActionNewProvince">Province</button>
+      <button type="button" class="btn btn-primary ActionNewCity">City</button>
+      <button type="button" class="btn btn-primary ActionNewBarangay">Barangay</button>
+    </div>
 </div>
 
 </div>
@@ -43,7 +47,7 @@
     <div class="card card-table-bordered card-stretch">
         <div class="container-fluid">
             <div style="margin-top:10px; margin-left: 5px; margin-right: 5px;margin-bottom: 10px;">
-
+<h6>Provinces</h6> 
 <table class="table table-hover">
   <thead class="table-light">
     <tr>
@@ -78,6 +82,43 @@
     </div>
 </div>
 
+<hr>
+
+<div class="nk-block">
+    <div class="card card-table-bordered card-stretch">
+        <div class="container-fluid">
+            <div style="margin-top:10px; margin-left: 5px; margin-right: 5px;margin-bottom: 10px;">
+<h6>Cities</h6>
+<table class="table table-hover">
+  <thead class="table-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Provice</th>
+      <th scope="col">City</th>
+      <th scope="col">Status</th>
+      <th scope="col" class="text-center">Action</th>
+    </tr>
+  </thead>
+
+<tbody>
+    @foreach($city_list as $details)
+    <tr style="font-size:13px;">
+      <th scope="row">{{ $loop->index + 1 }}</th>
+      <td>{{ $details->province }}</td>
+      <td>{{ $details->city }}</td>
+      <td>{{ $details->name }}</td>
+      <td style="width:200px;text-align: center;">
+        <button type="button"  value="{{ $details->id }}" class="btn btn-sm btn-outline-primary ActionEdit">Update</button>
+        <button type="button"  value="{{ $details->id }}" class="btn btn-sm btn-outline-danger ActionDelete">Delete</button>
+      </td>
+    </tr>
+    @endforeach
+  </tbody>
+
+</table>
+
+
+
 
             </div>
         </div>
@@ -85,7 +126,61 @@
 </div>
 
 
-{{-- ----------------- ADD LOCATION ------------- --}}
+
+<hr>
+
+<div class="nk-block">
+    <div class="card card-table-bordered card-stretch">
+        <div class="container-fluid">
+            <div style="margin-top:10px; margin-left: 5px; margin-right: 5px;margin-bottom: 10px;">
+<h6>Barangays</h6>
+<table class="table table-hover">
+  <thead class="table-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Provice</th>
+      <th scope="col">City</th>
+      <th scope="col">Barangay</th>
+      <th scope="col">Status</th>
+      <th scope="col" class="text-center">Action</th>
+    </tr>
+  </thead>
+
+    <tbody>
+    @foreach($barangay_list as $details)
+    <tr style="font-size:13px;">
+      <th scope="row">{{ $loop->index + 1 }}</th>
+      <td>{{ $details->province }}</td>
+      <td>{{ $details->city }}</td>
+      <td>{{ $details->barangay }}</td>
+      <td>{{ $details->name }}</td>
+      <td style="width:200px;text-align: center;">
+        <button type="button"  value="{{ $details->id }}" class="btn btn-sm btn-outline-primary ActionEdit">Update</button>
+        <button type="button"  value="{{ $details->id }}" class="btn btn-sm btn-outline-danger ActionDelete">Delete</button>
+      </td>
+    </tr>
+    @endforeach
+  </tbody>
+
+</table>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{-- ----------------- new province ------------- --}}
 <div class="modal fade zoom" tabindex="-1" id="ActionNewProvinceModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -132,6 +227,157 @@
     </div>
 </div>
 {{-- -----------------------end----------------------- --}}
+
+
+
+{{-- ----------------- new city ------------- --}}
+<div class="modal fade zoom" tabindex="-1" id="ActionNewCityModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <em class="icon ni ni-cross"></em>
+            </a>
+            <div class="modal-header">
+                <h5 class="modal-title">New City</h5>
+            </div>
+
+<form action="{{ route('ms-location_new_city') }}" method="POST">
+    @csrf
+<div class="modal-body">
+
+<div class="form-group">
+<label class="form-label" for="default-06">Province</label>
+<div class="form-control-wrap ">
+    <div class="form-control-select">
+        <select class="form-control" id="default-06" name="the_province">
+            <option value="">-Select Status-</option>
+            @foreach($provice_list as $provinces)
+            <option value="{{ $provinces['id'] }}">{{ $provinces['province'] }}</option>
+            @endforeach
+        </select>
+    </div>
+</div>
+</div>
+
+<div class="form-group">
+    <label class="form-label">City</label>
+    <div class="form-control-wrap">
+        <input type="text" class="form-control" name="the_city" id="the_city" >
+    </div>
+</div>
+
+<div class="form-group">
+<label class="form-label" for="default-06">Status</label>
+<div class="form-control-wrap ">
+    <div class="form-control-select">
+        <select class="form-control" id="default-06" name="the_status">
+            <option value="">-Select Status-</option>
+            @foreach($status_list as $stat)
+            <option value="{{ $stat['id'] }}">{{ $stat['name'] }}</option>
+            @endforeach
+        </select>
+    </div>
+</div>
+</div>
+
+</div>
+<div class="modal-footer bg-light">
+    <button type="submit" class="btn btn-primary">Save Information</button>
+</div>
+
+</form>
+
+        </div>
+    </div>
+</div>
+{{-- -----------------------end----------------------- --}}
+
+
+{{-- ----------------- new brgy ------------- --}}
+<div class="modal fade zoom" tabindex="-1" id="ActionNewBarangayModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <em class="icon ni ni-cross"></em>
+            </a>
+            <div class="modal-header">
+                <h5 class="modal-title">New Barangay</h5>
+            </div>
+
+<form action="{{ route('ms-location_new_barangay') }}" method="POST">
+    @csrf
+<div class="modal-body">
+
+<div class="form-group">
+<label class="form-label" for="default-06">Province</label>
+<div class="form-control-wrap ">
+    <div class="form-control-select">
+        <select class="form-control" id="default-06" name="the_province">
+            <option value="">-Select Status-</option>
+            @foreach($provice_list as $provinces)
+            <option value="{{ $provinces['id'] }}">{{ $provinces['province'] }}</option>
+            @endforeach
+        </select>
+    </div>
+</div>
+</div>
+
+<div class="form-group">
+<label class="form-label" for="default-06">City</label>
+<div class="form-control-wrap ">
+    <div class="form-control-select">
+        <select class="form-control" id="default-06" name="the_city">
+            <option value="">-Select Status-</option>
+            @foreach($city_list as $city)
+            <option value="{{ $city['city_id'] }}">{{ $city['city'] }}</option>
+            @endforeach
+        </select>
+    </div>
+</div>
+</div>
+
+
+
+<div class="form-group">
+    <label class="form-label">Barangay</label>
+    <div class="form-control-wrap">
+        <input type="text" class="form-control" name="the_barangay" >
+    </div>
+</div>
+
+<div class="form-group">
+<label class="form-label" for="default-06">Status</label>
+<div class="form-control-wrap ">
+    <div class="form-control-select">
+        <select class="form-control" id="default-06" name="the_status">
+            <option value="">-Select Status-</option>
+            @foreach($status_list as $stat)
+            <option value="{{ $stat['id'] }}">{{ $stat['name'] }}</option>
+            @endforeach
+        </select>
+    </div>
+</div>
+</div>
+
+</div>
+<div class="modal-footer bg-light">
+    <button type="submit" class="btn btn-primary">Save Information</button>
+</div>
+
+</form>
+
+        </div>
+    </div>
+</div>
+{{-- -----------------------end----------------------- --}}
+
+
+
+
+
+
+
+
 
 
 <!-- edit modal!-->
@@ -223,6 +469,18 @@
 $(document).ready(function () {
 $(document).on('click','.ActionNewProvince', function() { 
     $('#ActionNewProvinceModal').modal('show');
+});
+});
+
+$(document).ready(function () {
+$(document).on('click','.ActionNewCity', function() { 
+    $('#ActionNewCityModal').modal('show');
+});
+});
+
+$(document).ready(function () {
+$(document).on('click','.ActionNewBarangay', function() { 
+    $('#ActionNewBarangayModal').modal('show');
 });
 });
 

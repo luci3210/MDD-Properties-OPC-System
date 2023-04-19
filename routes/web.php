@@ -10,6 +10,7 @@ use App\Http\Controllers\mdd\dashboard\myemailcontroller;
 use App\Http\Controllers\mdd\dashboard\generateuqid;
 use App\Http\Controllers\mdd\dashboard\validateUser;
 use App\Http\Controllers\mdd\dashboard\locationcontroller;
+use App\Http\Controllers\mdd\dashboard\projectcontroller;
 use App\Http\Livewire\Manage\ManageStatus;
 use App\Http\Livewire\Manage\ManageComponentStatus;
 use App\Http\Controllers\mdd\ppauth\AuthLoginController;
@@ -155,11 +156,27 @@ Route::prefix('mdd-properties/dashboard/jsx/managestaff')->group(function() {
         ->controller(locationcontroller::class)
             ->group(function() {
                 Route::get('locations','locations')->name('ms-location');
+
                 Route::post('locations-province-new','locations_new')->name('ms-location-new');
                 Route::get('locations-province-edit/{id}','locations_edit')->name('ms-location-edit');
                 Route::post('locations-province-update','location_provinces_update')->name('ms-location_provinces_update');
                 Route::get('locations-province-delete/{id}','location_provinces_delete')->name('ms-location_provinces_delete');
                 Route::post('locations-province-deleted','location_provinces_deleted')->name('ms-location_provinces_deleted');
+
+                Route::post('locations_new_city','locations_new_city')->name('ms-location_new_city');
+                Route::post('locations__new_barangay','locations_new_barangay')->name('ms-location_new_barangay');
+
+
+    });
+});
+
+
+// MANAGE STAFF - PROJECTS
+Route::prefix('mdd-properties/dashboard/jsx/managestaff')->group(function() {
+    Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
+        ->controller(projectcontroller::class)
+            ->group(function() {
+                Route::get('projects','project')->name('ms-projects');
 
 
     });
