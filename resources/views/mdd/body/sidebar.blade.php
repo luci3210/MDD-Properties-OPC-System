@@ -26,7 +26,7 @@
 <li class="nk-menu-item has-sub">
     <a href="#" class="nk-menu-link nk-menu-toggle">
         <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
-        <span class="nk-menu-text">Manage User</span>
+        <span class="nk-menu-text">Manage User</span><span class="nk-menu-badge">Admin</span>
     </a>
     <ul class="nk-menu-sub">
 
@@ -135,7 +135,7 @@
 <li class="nk-menu-item has-sub">
     <a href="#" class="nk-menu-link nk-menu-toggle">
         <span class="nk-menu-icon"><em class="icon ni ni-user-list"></em></span>
-        <span class="nk-menu-text">Staff</span><span class="nk-menu-badge">New</span>
+        <span class="nk-menu-text">Marketing</span><span class="nk-menu-badge">IT</span>
     </a>
     <ul class="nk-menu-sub">
         <li class="nk-menu-item">
@@ -145,7 +145,7 @@
             <a href="{{ route('ms-location') }}" class="nk-menu-link"><span class="nk-menu-text">Location</span></a>
         </li>
         <li class="nk-menu-item">
-            <a href="html/customer-details.html" class="nk-menu-link"><span class="nk-menu-text">Product</span></a>
+            <a href="{{ route('ms-projects') }}" class="nk-menu-link"><span class="nk-menu-text">Project</span></a>
         </li>
     </ul><!-- .nk-menu-sub -->
 </li><!-- .nk-menu-item -->

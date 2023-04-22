@@ -36,7 +36,7 @@
                                                 </div>
                                                 <div class="user-info d-none d-md-block">
                                                     <div class="user-status">Department Name</div>
-                                                    <div class="user-name dropdown-indicator">{{ Auth::user()->name }}</div>
+                                                    {{-- <div class="user-name dropdown-indicator">{{ Auth::user()->name }}</div> --}}
                                                 </div>
                                             </div>
                                         </a>
@@ -47,8 +47,8 @@
                                                         <span>AB</span>
                                                     </div>
                                                     <div class="user-info">
-                                                        <span class="lead-text">{{ Auth::user()->name }}</span>
-                                                        <span class="sub-text">{{ Auth::user()->email }}</span>
+                                                       {{--  <span class="lead-text">{{ Auth::user()->name }}</span>
+                                                        <span class="sub-text">{{ Auth::user()->email }}</span> --}}
                                                     </div>
                                                 </div>
                                             </div>

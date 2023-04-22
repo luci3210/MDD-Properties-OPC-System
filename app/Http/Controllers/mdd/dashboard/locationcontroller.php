@@ -231,6 +231,44 @@ class locationcontroller extends Controller
 
 
 
+    public function getProvinces()
+    {
+        // $this->validateUser->validateDepartmentAdmin(Auth::user()->department);
+        $provinces = locationProvice::join('statuses','location_provices.status','statuses.id')->where('location_provices.status','!=',6)->select('location_provices.id','location_provices.province','statuses.name')->get();
+
+        return response()->json($provinces);
+    }
+
+    public function getCities(Request $request)
+    {
+        $proviceId = $request->get('province');
+
+        $cities = locationCity::join('statuses','location_cities.status','statuses.id')->join('location_provices','location_cities.province','location_provices.id')->where('location_cities.province',$proviceId)
+            ->select('location_provices.id','location_provices.province','location_cities.id as city_id','location_cities.city','statuses.name')->get();
+
+        return response()->json($cities);
+    }
+
+
+
+     public function getBarangay(Request $request) {
+
+        $city = $request->get('city');
+
+        $barangays = locationBaragay::join('statuses','location_baragays.status','statuses.id')
+            ->join('location_provices','location_baragays.province','location_provices.id')
+            ->join('location_cities','location_baragays.city','location_cities.id')->where('location_baragays.city',$city)
+            ->select('location_provices.id','location_provices.province','location_cities.id as city_id','location_cities.city','location_baragays.barangay','location_baragays.id as barangay_id','statuses.name')->get();
+
+        return response()->json($barangays);
+    }
+
+
+
+
+
+
+
     public function location_provinces() {
 
         return locationProvice::join('statuses','location_provices.status','statuses.id')->where('location_provices.status','!=',6)->select('location_provices.id','location_provices.province','statuses.name')->get();
@@ -239,6 +277,13 @@ class locationcontroller extends Controller
     public function location_city() {
 
         return locationCity::join('statuses','location_cities.status','statuses.id')->join('location_provices','location_cities.province','location_provices.id')->where('location_cities.status','!=',6)
+            ->select('location_provices.id','location_provices.province','location_cities.id as city_id','location_cities.city','statuses.name')->get();
+    }
+
+
+    public function location_province_to_city($id) {
+
+        return locationCity::join('statuses','location_cities.status','statuses.id')->join('location_provices','location_cities.province','location_provices.id')->where('location_cities.province',$id)
             ->select('location_provices.id','location_provices.province','location_cities.id as city_id','location_cities.city','statuses.name')->get();
     }
 

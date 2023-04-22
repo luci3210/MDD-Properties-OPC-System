@@ -61,6 +61,11 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 
+Route::controller(locationcontroller::class)->group(function () {
+     Route::get('getssssProvinces','getProvinces')->name('getprovinces');
+      Route::get('getcities','getCities')->name('getcities');
+      Route::get('getbarangay','getBarangay')->name('getbarangay');
+});
 
 
 Route::controller(validateUser::class)->group(function () {
@@ -166,6 +171,14 @@ Route::prefix('mdd-properties/dashboard/jsx/managestaff')->group(function() {
                 Route::post('locations_new_city','locations_new_city')->name('ms-location_new_city');
                 Route::post('locations__new_barangay','locations_new_barangay')->name('ms-location_new_barangay');
 
+                Route::get('select-location_province_to_city/{id}','location_province_to_city')->name('sdsdsdsd');
+                // Route::get('select-location_province_to_city/{id}','location_province_to_city')->name('sdsdsdsd');
+                Route::get('getssssProvinces','getProvinces')->name('getprovinces');
+                Route::get('getcities','getCities')->name('getcities');
+
+
+
+
 
     });
 });
@@ -177,6 +190,7 @@ Route::prefix('mdd-properties/dashboard/jsx/managestaff')->group(function() {
         ->controller(projectcontroller::class)
             ->group(function() {
                 Route::get('projects','project')->name('ms-projects');
+                Route::get('projects-form','project_form')->name('ms-projects-form');
 
 
     });

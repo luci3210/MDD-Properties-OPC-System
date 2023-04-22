@@ -18,10 +18,13 @@
 
     <style>
         .form-control {
-            border: 1px solid #000 !important;
+            border: 1px solid #e6e8e9 !important;
         }
         .is-dark {
 /*            background: #c27ba3 !important;*/
+        }
+        .card-bordered {
+            border: 1px solid #e6e8e9 !important;   
         }
     </style>
 
