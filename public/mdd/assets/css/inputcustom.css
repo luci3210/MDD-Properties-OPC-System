@@ -1,0 +1,21 @@
+.form-label {
+    position: relative !important;
+    left: 15px !important;
+    bottom: -19px !important;
+    z-index: 1 !important;
+    background-color: white;
+    padding-left:4px;
+    padding-right:4px;
+    font-size:11px;
+    font-weight:300;
+}
+.form-group {
+    position: relative !important;
+    top: -30px !important;
+}
+.preview-hr {
+    margin-bottom:-5px !important;
+    margin-top:15px !important;
+    opacity: 1 !important;
+
+}

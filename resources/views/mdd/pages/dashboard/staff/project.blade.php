@@ -9,13 +9,22 @@
 
 <div class="nk-block-head nk-block-head-sm">
 <div class="nk-block-between g-3">
-    <div class="nk-block-head-content">
-        <h3 class="nk-block-title page-title">MDD Project Site</h3>
-    </div>
 
 
 <div class="nk-block-head-content">
-    <a href={{ route('ms-projects-form') }} class="btn btn-primary">New</a>
+<nav>
+<ul class="breadcrumb breadcrumb-arrow">
+<li class="breadcrumb-item"><a href="#">Marketing</a></li>
+<li class="breadcrumb-item active">Project Site</li>
+</ul>
+</nav>
+</div>
+
+
+<div class="nk-block-head-content">
+    <a href={{ route('ms-projects-form') }} class="btn btn-sm btn-primary">New</a>
+    <a href={{ route('ms-projects-form') }} class="btn btn-sm btn-primary">Import</a>
+    <a href={{ route('ms-projects-form') }} class="btn btn-sm btn-primary">Export</a>
 </div>
 
 </div>
@@ -39,34 +48,90 @@
             <div style="margin-top:10px; margin-left: 5px; margin-right: 5px;">
                 {{-- <livewire:manage-status /> --}}
 
-@if($project == null)
+{{-- @if($project != null) --}}
 <table class="table table-hover">
   <thead class="table-light">
     <tr>
       <th scope="col">#</th>
+      <th scope="col">Image</th>
+      <th scope="col">Name</th>
+      <th scope="col">Province</th>
+      <th scope="col">City</th>
+      <th scope="col">Barangay</th>
       <th scope="col">Status</th>
-      <th scope="col">Description</th>
       <th scope="col" class="text-center">Action</th>
     </tr>
   </thead>
 
   <tbody>
-   {{--  @foreach($statuses as $status)
+    @foreach($project as $listing)
     <tr style="font-size:13px;">
       <th scope="row">{{ $loop->index + 1 }}</th>
-      <td>{{ $status->name }}</td>
-      <td>{{ $status->description }}</td>
-      <td style="width:200px;text-align: center;">
-        <button type="button"  value="{{ $status->id }}" class="btn btn-sm btn-outline-primary ActionEdit">Update</button>
+      <td>
+        <div class="user-avatar sq">
+        <img style="width: 50px; height:40px;"src="{{ asset('mdd/assets/images/project')}}/{{ $listing->skitch_img == null ? 'logo.png' : json_decode($listing->skitch_img)[0] }}" alt="" class="thumb">
+        </div>
+      </td>
+      <td>{{ $listing->name }}</td>
+      <td>{{ $listing->provinces }}</td>
+      <td>{{ $listing->cities }}</td>
+      <td>{{ $listing->barangays }}</td>
+      <td>Active</td>
+      <td style="width:270px;text-align: center;">
+        <a href="{{ route('ms-get-project-info',[$listing->id,$listing->area]) }}" class="btn btn-sm btn-dim btn-dark">Create</a>
+        <a href="{{ route('ms-get-project-info',[$listing->id,$listing->area]) }}" class="btn btn-sm btn-dim btn-dark">Update</a>
+        <a href="{{ route('ms-get-property-info',[$listing->id,$listing->area]) }}" class="btn btn-sm btn-dim btn-secondary">Properties</a>
       </td>
     </tr>
-    @endforeach --}}
+    @endforeach
   </tbody>
 
 </table>
-@else
+{{-- @else
 dfdf
-@endif 
+@endif  --}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -266,39 +331,6 @@ $(function() {
         maxlength: "New status name at least 30 max of character."
       },
       stat_desc: {
-        required: "Please enter new status description.",
-        minlength: "New status description at least 6 character.",
-        maxlength: "New status description at least 50 max of character."
-      }
-    },
-
-  });
-});
-
-
-$(function() {
-
-  $("#ValidateEditStatus").validate({
-    rules: {
-      the_name: {
-        required: true,
-        minlength:3,
-        maxlength:50
-      },
-      the_description: {
-        required: true,
-        minlength:6,
-        maxlength:50
-      } 
-
-  },
-    messages: {
-      the_name: {
-        required: "Please enter new status name.",
-        minlength: "New status name at least 3 character.",
-        maxlength: "New status name at least 30 max of character."
-      },
-      the_description: {
         required: "Please enter new status description.",
         minlength: "New status description at least 6 character.",
         maxlength: "New status description at least 50 max of character."

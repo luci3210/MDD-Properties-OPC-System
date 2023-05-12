@@ -64,14 +64,11 @@
 <li class="nk-menu-item has-sub">
     <a href="#" class="nk-menu-link nk-menu-toggle">
         <span class="nk-menu-icon"><em class="icon ni ni-tranx"></em></span>
-        <span class="nk-menu-text">Manage Buyer</span>
+        <span class="nk-menu-text">Manage Client</span>
     </a>
     <ul class="nk-menu-sub">
         <li class="nk-menu-item">
-            <a href="html/transaction-basic.html" class="nk-menu-link"><span class="nk-menu-text">Tranx List - Basic</span></a>
-        </li>
-        <li class="nk-menu-item">
-            <a href="html/transaction-crypto.html" class="nk-menu-link"><span class="nk-menu-text">Tranx List - Crypto</span></a>
+            <a href="{{ route('c-client_index') }}" class="nk-menu-link"><span class="nk-menu-text">Clients</span></a>
         </li>
     </ul><!-- .nk-menu-sub -->
 </li>
@@ -108,7 +105,7 @@
     </a>
     <ul class="nk-menu-sub">
         <li class="nk-menu-item">
-            <a href="html/project-card.html" class="nk-menu-link"><span class="nk-menu-text">Project Cards</span></a>
+            <a href="{{ route('casher-over-the-counter') }}" class="nk-menu-link"><span class="nk-menu-text">Casher</span></a>
         </li>
         <li class="nk-menu-item">
             <a href="html/project-list.html" class="nk-menu-link"><span class="nk-menu-text">Project List</span></a>
@@ -134,19 +131,35 @@
 
 <li class="nk-menu-item has-sub">
     <a href="#" class="nk-menu-link nk-menu-toggle">
-        <span class="nk-menu-icon"><em class="icon ni ni-user-list"></em></span>
-        <span class="nk-menu-text">Marketing</span><span class="nk-menu-badge">IT</span>
+        <span class="nk-menu-icon"><em class="icon ni ni-layers-fill"></em></span>
+        <span class="nk-menu-text">Marketing</span><span class="nk-menu-badge"></span>
     </a>
     <ul class="nk-menu-sub">
         <li class="nk-menu-item">
-            <a href="html/customer-list.html" class="nk-menu-link"><span class="nk-menu-text">Banner</span></a>
+            <a href="html/customer-list.html" class="nk-menu-link">
+                <em class="icon ni ni-chevron-right"></em>
+                <span class="nk-menu-text">Banner</span>
+            </a>
         </li>
         <li class="nk-menu-item">
-            <a href="{{ route('ms-location') }}" class="nk-menu-link"><span class="nk-menu-text">Location</span></a>
+            <a href="{{ route('ms-property-costing-index') }}" class="nk-menu-link">
+                <em class="icon ni ni-chevron-right"></em>
+                    <span class="nk-menu-text">Costing</span>
+            </a>
         </li>
         <li class="nk-menu-item">
-            <a href="{{ route('ms-projects') }}" class="nk-menu-link"><span class="nk-menu-text">Project</span></a>
+            <a href="{{ route('ms-location') }}" class="nk-menu-link"> 
+                <em class="icon ni ni-chevron-right"></em>
+                <span class="nk-menu-text">Location</span>
+            </a>
         </li>
+        <li class="nk-menu-item">
+            <a href="{{ route('ms-projects-index') }}" class="nk-menu-link">
+                <em class="icon ni ni-chevron-right"></em> 
+                <span class="nk-menu-text">Project Site</span>
+            </a>
+        </li>
+
     </ul><!-- .nk-menu-sub -->
 </li><!-- .nk-menu-item -->
 

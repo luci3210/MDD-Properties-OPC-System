@@ -26,7 +26,12 @@
         .card-bordered {
             border: 1px solid #e6e8e9 !important;   
         }
+        .breadcrumb-item {
+            font-size:14px !important;
+        }
     </style>
+
+    @stack('inputcustom')
 
 </head>
 

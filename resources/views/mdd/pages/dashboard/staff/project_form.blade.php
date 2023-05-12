@@ -9,13 +9,16 @@
 
 <div class="nk-block-head nk-block-head-sm">
 <div class="nk-block-between g-3">
-    <div class="nk-block-head-content">
-        <h3 class="nk-block-title page-title">MDD Project Site</h3>
-    </div>
 
 
 <div class="nk-block-head-content">
-    <a href="{{ route('ms-projects') }}"  type="button" class="btn btn-primary">Back</a>
+<nav>
+<ul class="breadcrumb breadcrumb-arrow">
+<li class="breadcrumb-item"><a href="#">Marketing</a></li>
+<li class="breadcrumb-item"><a href="#">Project Site</a></li>
+<li class="breadcrumb-item active">form New</li>
+</ul>
+</nav>
 </div>
 
 </div>
@@ -40,40 +43,50 @@
 
 <div class="card card-bordered">
 <div class="card-inner">
-    <div class="card-head">
-        <h5 class="card-title">Project Form</h5>
-    </div>
-    <form action="#">
+ 
+    <form action="{{ route('ms-project-store') }}" method="post" id="TheProjectForm" enctype="multipart/form-data">
+        @csrf
         <div class="row g-4">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label class="form-label" for="full-name-1">Name</label>
+                    <label class="form-label" for="full-name-1">Name</label> <span class="text-danger">*</span> 
                     <div class="form-control-wrap">
-                        <input type="text" class="form-control" id="the_name" name="the_name" value="">
+                        <input type="text" class="form-control" id="the_name" name="the_name" value="{{ old('the_name') }}" required>
+                        <span id="the_name-error" class="error"></span>
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label class="form-label" for="email-address-1">Longitude</label>
-                    <div class="form-control-wrap">
-                        <input type="text" class="form-control" id="the_longi" name="the_longi" value="">
+                    <label class="form-label" for="full-name-1">Address</label> <span class="text-danger">*</span> 
+                    <div class="form-control-wrap">                        
+                        <input type="text" id="the_address" name="the_address" value="{{ old('the_address') }}" class="form-control">
+                        <span id="the_address-error" class="error"></span>
                     </div>
                 </div>
             </div>
+
+                                
+            <input type="hidden" id="the_slug" name="the_slug" value="{{ old('the_slug') }}" class="form-control" readonly="readonly">
+              
+
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label class="form-label" for="phone-no-1">Description</label>
+                    <label class="form-label" for="email-address-1">Longitude</label> <span class="text-danger">*</span> 
                     <div class="form-control-wrap">
-                        <input type="text" class="form-control" id="the_description" name="the_description" value="">
+                        <input type="text" class="form-control" id="the_longi" name="the_longi" value="{{ old('the_longi') }}">
+                        <span id="the_longi-error" class="error"></span>
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label class="form-label" for="pay-amount-1">Latitude</label>
+                    <label class="form-label" for="pay-amount-1">Latitude</label> <span class="text-danger">*</span> 
                     <div class="form-control-wrap">
-                        <input type="text" class="form-control" id="the_lati" name="the_lati" value="">
+                        <input type="text" class="form-control" id="the_lati" name="the_lati" value="{{ old('the_lati') }}">
+                        <span id="the_lati-error" class="error"></span>
                     </div>
                 </div>
             </div>
@@ -81,30 +94,33 @@
 
             <div class="col-lg-6">
                 <div class="form-control-select">
-                     <label class="form-label" for="default-06">Province</label>
+                     <label class="form-label" for="default-06">Province</label> <span class="text-danger">*</span> 
                     <select class="form-control" name="provinceID" id="provinceID" onchange="populateCities()">
                         <option value="">-- Select Province --</option>
                     </select>
+                    <span id="provinceID-error" class="error"></span>
                 </div>
             </div>
 
 
              <div class="col-lg-6">
                 <div class="form-control-select">
-                     <label class="form-label" for="default-06">City</label>
+                     <label class="form-label" for="default-06">City</label> <span class="text-danger">*</span> 
                     <select class="form-control" name="city" id="city" onchange="populateBarangays()">
                         <option value="">-- Select City --</option>
                     </select>
+                    <span id="city-error" class="error"></span>
                 </div>
             </div>
 
 
              <div class="col-lg-6">
                 <div class="form-control-select">
-                     <label class="form-label" for="default-06">Barangay</label>
+                     <label class="form-label" for="default-06">Barangay</label> <span class="text-danger">*</span> 
                     <select class="form-control" name="barangay" id="barangay" >
                         <option value="">-- Select Barangay --</option>
                     </select>
+                    <span id="barangay-error" class="error"></span>
                 </div>
             </div>
 
@@ -116,11 +132,11 @@
 
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label class="form-label">Upload Images</label>
+                    <label class="form-label">Upload Images</label> <span class="text-danger">*</span> 
                     <div class="form-control-wrap">
                         <div class="form-file">
-                            <input type="file" multiple="" class="form-file-input" id="customMultipleFiles">
-                            <label class="form-file-label" for="customMultipleFiles"></label>
+                            <input type="file" name="the_images[]" multiple class="form-file-input" id="customMultipleFiles">
+                            <label class="form-file-label" for="customMultipleFiles">Choose files</label>
                         </div>
                     </div>
                 </div>
@@ -159,142 +175,16 @@
 </div>
           
 
-<!-- new modal!-->
-
-<div class="modal fade zoom" tabindex="-1" id="modalNew">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
-                <em class="icon ni ni-cross"></em>
-            </a>
-            <div class="modal-header">
-                <h5 class="modal-title">New Status</h5>
-            </div>
-
-<form action="{{ route('status-form-create') }}" method="POST" id="ValidateNewStatus">
-    @csrf
-<div class="modal-body">
-    <div class="form-group">
-        <div class="form-control-wrap">
-            <input type="text" class="form-control form-control-outlined"  id="stat_name" name="stat_name">
-            <label class="form-label-outlined" for="outlined">Enter Status Name</label>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="form-control-wrap">
-            <input type="text" class="form-control form-control-outlined"  id="stat_desc" name="stat_desc">
-            <label class="form-label-outlined" for="outlined">Enter Description</label>
-        </div>
-    </div>
-
-</div>
-            <div class="modal-footer bg-light">
-                <button type="submit" class="btn btn-primary" id="SaveInfo">Save Information</button>
-            </div>
-</form>
-
-        </div>
-    </div>
-</div>
-
-<!-- end of new modal!-->
-
-<!-- edit modal!-->
-
-<div class="modal fade zoom" tabindex="-1" id="ActionEditModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
-                <em class="icon ni ni-cross"></em>
-            </a>
-            <div class="modal-header">
-                <h5 class="modal-title">Update Status</h5>
-            </div>
-
-<form action="{{ route('status-form-update') }}" method="POST" id="ValidateEditStatus">
-    @csrf
-<div class="modal-body">
-
-<div class="form-group">
-    <label class="form-label" for="default-01">Status Name</label>
-    <div class="form-control-wrap">
-        <input type="hidden" class="form-control" id="the_id" name="the_id" required>
-        <input type="text" class="form-control" id="the_name" name="the_name" required>
-    </div>
-</div>
-
-<div class="form-group">
-    <label class="form-label" for="default-01">Status Description</label>
-    <div class="form-control-wrap">
-        <input type="text" class="form-control" id="the_description" name="the_description" required>
-    </div>
-</div>
-
-</div>
-<div class="modal-footer bg-light">
-    <button type="submit" class="btn btn-primary" id="SaveInfo">Update Information</button>
-</div>
-
-</form>
-
-        </div>
-    </div>
-</div>
-
-<!-- end of edit modal!-->
-
-
-<!-- delete modal!-->
-
-<div class="modal fade zoom" tabindex="-1" id="deleteModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
-                <em class="icon ni ni-cross"></em>
-            </a>
-            <div class="modal-header">
-                <h5 class="modal-title">Delete Status</h5>
-            </div>
-
-<form action="{{ route('status-form-delete') }}" method="POST" id="ValidateDeleteStatus">
-    @csrf
-<div class="modal-body">
-
-    <div class="alert-text">
-        <h6 class="text-danger">Are you sure you want to delete?</h6>
-    </div>
-    <input type="hidden" class="form-control" id="del_id" name="del_id">
-
-</div>
-<div class="modal-footer bg-light">
-    <button type="submit" class="btn btn-danger" id="SaveInfo">Delete Information</button>
-</div>
-
-</form>
-
-        </div>
-    </div>
-</div>
-
-<!-- end of delete modal!-->
-
-
-
-
-
 <script type="text/javascript">
-
-
 
 function populateProvinces() {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'http://127.0.0.1:8000/mdd-properties/dashboard/jsx/managestaff/getssssProvinces', true);
+    xhr.open('GET', 'http://127.0.0.1:8000/mdd-properties/dashboard/jsx/managestaff/getprovices', true);
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var province = JSON.parse(xhr.responseText);
-            var output = '<option value="">-- Select Country --</option>';
+            var output = '<option value="">-- Select Province --</option>';
 
             for (var i = 0; i < province.length; i++) {
                 output += '<option value="' + province[i].id + '">' + province[i].province + '</option>';
@@ -310,14 +200,12 @@ window.onload = function() {
     populateProvinces();
 }
 
-
-
 function populateCities() {
     var provinceId = document.getElementById('provinceID').value;
 
     if (provinceId) {
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'http://127.0.0.1:8000/getcities?province=' + provinceId, true);
+        xhr.open('GET', 'http://127.0.0.1:8000/mdd-properties/dashboard/jsx/managestaff/getcities?province=' + provinceId, true);
         xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
@@ -344,7 +232,7 @@ function populateBarangays() {
 
     if (cityId) {
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/getbarangay?city=' + cityId, true);
+        xhr.open('GET', '/mdd-properties/dashboard/jsx/managestaff/getbarangays?city=' + cityId, true);
         xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
@@ -360,123 +248,128 @@ function populateBarangays() {
         };
         xhr.send();
     } else {
-        // document.getElementById('barangay').innerHTML = '<option value="">-- Select Barangay --</option>';
+        document.getElementById('barangay').innerHTML = '<option value="">-- Select Barangay --</option>';
     }
 }
 
+$(document).ready(function() {
 
+    var ValidateProjectFormRole = {
+      the_name: {
+        required: true,
+        minlength:3,
+        maxlength:150
+      },
 
+      the_address: {
+        required: true,
+        minlength:3,
+        maxlength:150
+      },
 
+      the_longi: {
+        required: true,
+        minlength:3,
+        maxlength:250
+      },
 
+       the_lati: {
+        required: true,
+        minlength:3,
+        maxlength:250
+      },
 
+       provinceID: {
+        required: true,
+        minlength:1,
+        maxlength:3,
+        number: true
+      },
 
+       city: {
+        required: true,
+        minlength:1,
+        maxlength:3,
+        number: true
+      },
 
+       barangay: {
+        required: true,
+        minlength:1,
+        maxlength:3,
+        number: true
+      }
 
+  };
 
+    var ValidateProjectFormMessage = {
+      the_name: {
+        required: "The name is required.",
+        minlength: "Please provide atleast 3 character.",
+        maxlength: "Please provide atleast less than 150 character."
+      },
 
-$(document).ready(function () {
+       the_address: {
+        required: "The address is required.",
+        minlength: "Please provide atleast 3 character.",
+        maxlength: "Please provide atleast less than 150 character."
+      },
 
-const selectElement = document.querySelector('#the_province');
-
-    selectElement.addEventListener('change', (event) => {
+      the_longi: {
+        required: "The longitude is required.",
+        minlength: "Please provide atleast 3 character.",
+        maxlength: "Please provide atleast less than 250 character."
+      },
   
-    const selectedOption = event.target.value;
+      the_lati: {
+        required: "The latitude is required.",
+        minlength: "Please provide atleast 3 character.",
+        maxlength: "Please provide atleast less than 250 character."
+      },
+      provinceID: {
+        required: "The province is required.",
+        minlength: "Please provide atleast 1 interger.",
+        maxlength: "Please provide atleast less than 3 character.",
+        number: "It should be integer."
+      },
+      city: {
+        required: "The city is required.",
+        minlength: "Please provide atleast 1 interger.",
+        maxlength: "Please provide atleast less than 3 character.",
+        number: "It should be integer."
+      },
+      barangay: {
+        required: "The barangay is required.",
+        minlength: "Please provide atleast 1 interger.",
+        maxlength: "Please provide atleast less than 3 character.",
+        number: "It should be integer."
+      }
+    };
 
-    $.ajax({
-            type: "GET",
-            url: "http://127.0.0.1:8000/mdd-properties/dashboard/jsx/managestaff/select-location_province_to_city/"+selectedOption,
-            success: function(response) {
-                $('#del_id').val(response.statuses.id);
-            }
-        });
-
+    $('#TheProjectForm').validate({
+        rules: ValidateProjectFormRole,
+        messages: ValidateProjectFormMessage,
+        errorElement: 'span',
+        errorPlacement: function(error, element) {
+            error.appendTo($('#' + element.attr('id') + '-error'));
+        }
     });
 
-});
+  });
 
 
+$("#the_name").keyup(function() 
+    {
+      var Text = $(this).val();
+      
+      Text = Text.toLowerCase();
+      
+      var regExp = /[`~!@#$%^&*()_\-+=\[\]{};:'"\\|\/,.<>?\s]/g;
 
+      Text = Text.replace(regExp,'-');
 
-$(document).ready(function () {
-    $(document).on('click','.modDelete', function() {
-
-        var ids = $(this).val();
-        $('#deleteModal').modal('show');
-        $.ajax({
-            type: "GET",
-            url: "http://127.0.0.1:8000/mdd-properties/dashboard/jsx/managestatus/status-form-edit/"+ids,
-            success: function(response) {
-                $('#del_id').val(response.statuses.id);
-            }
-        });
+      $("#the_slug").val(Text);        
     });
-});
-
-
-
-$(function() {
-
-  $("#ValidateNewStatus").validate({
-    rules: {
-      stat_name: {
-        required: true,
-        minlength:3,
-        maxlength:50
-      },
-      stat_desc: {
-        required: true,
-        minlength:6,
-        maxlength:50
-      } 
-
-  },
-    messages: {
-      stat_name: {
-        required: "Please enter new status name.",
-        minlength: "New status name at least 3 character.",
-        maxlength: "New status name at least 30 max of character."
-      },
-      stat_desc: {
-        required: "Please enter new status description.",
-        minlength: "New status description at least 6 character.",
-        maxlength: "New status description at least 50 max of character."
-      }
-    },
-
-  });
-});
-
-$(function() {
-
-  $("#ValidateEditStatus").validate({
-    rules: {
-      the_name: {
-        required: true,
-        minlength:3,
-        maxlength:50
-      },
-      the_description: {
-        required: true,
-        minlength:6,
-        maxlength:50
-      } 
-
-  },
-    messages: {
-      the_name: {
-        required: "Please enter new status name.",
-        minlength: "New status name at least 3 character.",
-        maxlength: "New status name at least 30 max of character."
-      },
-      the_description: {
-        required: "Please enter new status description.",
-        minlength: "New status description at least 6 character.",
-        maxlength: "New status description at least 50 max of character."
-      }
-    },
-
-  });
-});
 
 </script>
 

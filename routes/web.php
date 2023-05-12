@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Livewire\Manage\ManageStatus;
+use App\Http\Livewire\Manage\ManageComponentStatus;
+
+use App\Http\Controllers\mdd\ppauth\AuthLoginController;
+
 use App\Http\Controllers\mdd\ppauth\AuthController;
 use App\Http\Controllers\mdd\dashboard\UserController;
 use App\Http\Controllers\mdd\dashboard\manageusercontroller;
@@ -11,9 +17,12 @@ use App\Http\Controllers\mdd\dashboard\generateuqid;
 use App\Http\Controllers\mdd\dashboard\validateUser;
 use App\Http\Controllers\mdd\dashboard\locationcontroller;
 use App\Http\Controllers\mdd\dashboard\projectcontroller;
-use App\Http\Livewire\Manage\ManageStatus;
-use App\Http\Livewire\Manage\ManageComponentStatus;
-use App\Http\Controllers\mdd\ppauth\AuthLoginController;
+use App\Http\Controllers\mdd\dashboard\cashercontroller;
+use App\Http\Controllers\mdd\dashboard\clientcontroller;
+use App\Http\Controllers\mdd\dashboard\propertycontroller;
+use App\Http\Controllers\mdd\dashboard\UpdateController;
+use App\Http\Controllers\mdd\dashboard\CreateController;
+
 
 
 /*
@@ -61,13 +70,6 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 
-Route::controller(locationcontroller::class)->group(function () {
-     Route::get('getssssProvinces','getProvinces')->name('getprovinces');
-      Route::get('getcities','getCities')->name('getcities');
-      Route::get('getbarangay','getBarangay')->name('getbarangay');
-});
-
-
 Route::controller(validateUser::class)->group(function () {
 
     Route::get('auth','validateDepartment')->name('authd');
@@ -108,7 +110,7 @@ Route::prefix('mdd-properties/dashboard/jsx/manage-user')->group(function(){
                 Route::post('request-account-delete','request_account_delete')->name('mu-request-account-delete');
 
                 Route::get('user-list','user_index')->name('mu.user-index');
-                Route::get('user-edit/{id}','user_edit')->name('mu.user-edit');
+                // Route::get('user-edit/{id}','user_edit')->name('mu.user-edit');
                 Route::post('user-update','user_update')->name('mu-user-update');
 
     });
@@ -171,11 +173,9 @@ Route::prefix('mdd-properties/dashboard/jsx/managestaff')->group(function() {
                 Route::post('locations_new_city','locations_new_city')->name('ms-location_new_city');
                 Route::post('locations__new_barangay','locations_new_barangay')->name('ms-location_new_barangay');
 
-                Route::get('select-location_province_to_city/{id}','location_province_to_city')->name('sdsdsdsd');
-                // Route::get('select-location_province_to_city/{id}','location_province_to_city')->name('sdsdsdsd');
-                Route::get('getssssProvinces','getProvinces')->name('getprovinces');
+                Route::get('getprovices','getProvinces')->name('getprovinces');
                 Route::get('getcities','getCities')->name('getcities');
-
+                Route::get('getbarangays','getBarangay')->name('getbarangay');
 
 
 
@@ -185,13 +185,99 @@ Route::prefix('mdd-properties/dashboard/jsx/managestaff')->group(function() {
 
 
 // MANAGE STAFF - PROJECTS
+
 Route::prefix('mdd-properties/dashboard/jsx/managestaff')->group(function() {
     Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
         ->controller(projectcontroller::class)
             ->group(function() {
-                Route::get('projects','project')->name('ms-projects');
+                Route::get('projects-index','index')->name('ms-projects-index');
+                Route::get('projects-slug','project')->name('ms-projects-slug');
                 Route::get('projects-form','project_form')->name('ms-projects-form');
+                Route::post('project-store','project_store')->name('ms-project-store');
+                Route::post('project-properties-store','properties_store')->name('ms-properties-store');
+                Route::get('get-project-info/{id}/{area}','get_project_info')->name('ms-get-project-info');
+                Route::get('get-property-inf-id/{id}/{area}','get_property_info')->name('ms-get-property-info');
 
+                Route::get('property-costing-index','costing_index')->name('ms-property-costing-index');
+                Route::get('property-costing-form','calculation')->name('ms-property-calculation-index');
+                Route::post('property-costing-sumbit','costing_submit')->name('ms-property-costing-submit');
+                Route::get('get-costing-details/{id}','get_costing')->name('ms-get-costing-details');
+                Route::get('get-costingId','get_costingId')->name('ms-get-costingId');
+
+
+                Route::get('projects-site','project_listing')->name('ms-project_site');
+                Route::get('projects-site-id/{id}','project_site')->name('ms-project-site-id');
+                Route::get('projects-property-id','project_property_site')->name('ms-project-property-id');
+                Route::get('projects-property-lotid','project_propertylot_site')->name('ms-projects-property-lotid');
+                Route::get('projects-property-area-price/{id}','project_property_areaPrice')->name('ms-projects-property-area-price');
+
+
+
+
+    });
+});
+
+// CASHER
+
+Route::prefix('dashboard/mddproperties/casher.pay')->group(function() {
+    Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
+        ->controller(cashercontroller::class)
+            ->group(function() {
+                Route::get('walk-in','pay')->name('casher-over-the-counter');
+                Route::get('walk-in-search-ID','search_client_name')->name('c-search-client-name');
+                // Route::get('walk-in-search-ID','search_client_name')->name('c-search-client-name');
+                Route::get('walk-in/pay-method','pay_method')->name('c-walk-in-paymethod');
+
+
+                
+
+
+    });
+});
+
+Route::prefix('dashboard/mddproperties/property')->group(function() {
+    Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
+        ->controller(propertycontroller::class)
+            ->group(function() {
+                Route::get('get-property-id/{id}','JsonPropertyId')->name('p-get-property');
+
+
+                
+
+
+    });
+});
+
+
+// CLIENT
+
+Route::prefix('mdd-properties/dashboard/jsx/client')->group(function() {
+    Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
+        ->controller(clientcontroller::class)
+            ->group(function() {
+                Route::get('client-index','client_index')->name('c-client_index');
+                Route::post('client-create','client_create')->name('c-client-create');
+                Route::get('client-name','client_name')->name('c-client-name');
+                
+
+    });
+});
+
+
+Route::prefix('mdd-properties/dashboard/update/info')->group(function() {
+    Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
+        ->controller(UpdateController::class)
+            ->group(function() {
+                Route::put('update-property','updatePropertY')->name('update-property');
+
+    });
+});
+
+Route::prefix('mdd-properties/dashboard/create/pay')->group(function() {
+    Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
+        ->controller(CreateController::class)
+            ->group(function() {
+                Route::post('cash','pay')->name('cc-pay');
 
     });
 });
