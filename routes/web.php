@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\mdd\front\homecontroller;
+use App\Http\Controllers\mdd\front\iocontroller;
+use App\Http\Controllers\mdd\front\accountcontroller;
 
 use App\Http\Livewire\Manage\ManageStatus;
 use App\Http\Livewire\Manage\ManageComponentStatus;
@@ -25,6 +28,7 @@ use App\Http\Controllers\mdd\dashboard\CreateController;
 
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,10 +41,40 @@ use App\Http\Controllers\mdd\dashboard\CreateController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return "This page will be available soon";
 });
 
-// Route::get('/stat', ManageStatus::class);
+
+Route::controller(iocontroller::class)->group(function () {
+    Route::get('home/register','register_create')->name('ioregister');
+    Route::post('home/registered','register_submit')->name('ioregister_submit');
+    Route::get('home/validate-email/{id}/{uqid}','verifyClient')->name('iovalidate_email');
+    Route::get('home/login','login')->name('iologin');
+    Route::post('home/login','login_attemp')->name('iologin_attemp');
+    Route::post('home/logout','logout_attemp')->name('iologout_attemp');
+});
+
+Route::controller(homecontroller::class)->group(function () {
+    Route::get('/home','homeIndex');
+});
+
+Route::controller(homecontroller::class)->group(function () {
+    Route::get('/home','homeIndex');
+});
+
+Route::prefix('home/account')->group(function(){
+    Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
+        ->controller(accountcontroller::class)
+            ->group(function() {
+
+                Route::get('my-credential','credential')->name('mycredential');
+                Route::post('my-credential','credential_create')->name('mycredential_create');
+    });
+});
+
+
+
+
 
 Route::middleware([
     'auth:sanctum',
@@ -51,6 +85,7 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
 
 // ----------------------- LOGIN --------------------------------
 

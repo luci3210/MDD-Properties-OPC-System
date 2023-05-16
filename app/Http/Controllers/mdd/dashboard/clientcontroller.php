@@ -16,6 +16,11 @@ class clientcontroller extends Controller
          return view('mdd.pages.dashboard.client.client_index',['clients'=> $clients]);
     }
 
+    public function client_exist($id) {
+
+        return client::join('users','clients.user_id','users.id')->where('user_id',$id)->select('clients.*','users.*')->first();
+    }
+
     public function client_id($id) {
 
         return client::join('location_provices','clients.province','location_provices.id')

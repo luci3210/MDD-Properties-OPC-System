@@ -25,11 +25,6 @@
     </div>
 @endif
 
-@if (session('success'))
-    <script>
-        swal("Success!", "{{ session('success') }}", "success");
-    </script>
-@endif
 
 
 <form action="{{ route('cc-pay') }}" method="post">
@@ -249,13 +244,12 @@
     </div>
 </div>
 
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.js" integrity="sha512-MqEDqB7me8klOYxXXQlB4LaNf9V9S0+sG1i8LtPOYmHqICuEZ9ZLbyV3qIfADg2UJcLyCm4fawNiFvnYbcBJ1w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<link href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-
-<script type="text/javascript">
-</script>
-
+@if (session('success'))
+    <script>
+        swal("Success!", "{{ session('success') }}", "success");
+    </script>
+@endif
 
 @endsection
