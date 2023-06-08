@@ -321,6 +321,9 @@ class projectcontroller extends Controller
             $the_expanded_tax = $request->input('the_expanded_tax');
             $remark = $request->input('remark');
             $praj_name = $request->input('praj_name');
+            $the1stp = $request->input('the_1stp');
+            $the2ndp = $request->input('the_2ndp');
+            $the3rdp = $request->input('the_3rdp');
 
 
             foreach($propertiesData as $input) {
@@ -346,6 +349,9 @@ class projectcontroller extends Controller
                 $data->no_month_commi = $the_no_comm;
                 $data->expanded_htax = substr($the_expanded_tax,0,-1);
                 $data->remarks = $remark;
+                $data->price_one = $the1stp;
+                $data->price_two = $the2ndp;
+                $data->price_three = $the3rdp;
                 $data->save();
             }
 

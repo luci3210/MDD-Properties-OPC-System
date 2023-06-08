@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\mdd\front\homecontroller;
 use App\Http\Controllers\mdd\front\iocontroller;
 use App\Http\Controllers\mdd\front\accountcontroller;
+use App\Http\Controllers\mdd\front\updateFrontcontroller;
+use App\Http\Controllers\mdd\front\propertiesFrontcontroller;
 
 use App\Http\Livewire\Manage\ManageStatus;
 use App\Http\Livewire\Manage\ManageComponentStatus;
@@ -25,7 +27,11 @@ use App\Http\Controllers\mdd\dashboard\clientcontroller;
 use App\Http\Controllers\mdd\dashboard\propertycontroller;
 use App\Http\Controllers\mdd\dashboard\UpdateController;
 use App\Http\Controllers\mdd\dashboard\CreateController;
+use App\Http\Controllers\mdd\dashboard\pricingcontroller;
+use App\Http\Controllers\mdd\PaymentController;
+use App\Http\Controllers\mdd\CheckoutController;
 
+use App\Http\Controllers\mdd\public\PubhomeController;
 
 
 
@@ -40,8 +46,8 @@ use App\Http\Controllers\mdd\dashboard\CreateController;
 |
 */
 
-Route::get('/', function () {
-    return "This page will be available soon";
+Route::controller(PubhomeController::class)->group(function () {
+    Route::get('/','index')->name('mdd-home');
 });
 
 
@@ -55,12 +61,47 @@ Route::controller(iocontroller::class)->group(function () {
 });
 
 Route::controller(homecontroller::class)->group(function () {
-    Route::get('/home','homeIndex');
+    Route::get('/','homeIndex')->name('homes');
+    Route::get('/home/about-Us','aboutUsIndex')->name('front-aboutus-index');
 });
 
-Route::controller(homecontroller::class)->group(function () {
-    Route::get('/home','homeIndex');
+
+Route::controller(propertiesFrontcontroller::class)->group(function () {
+    Route::get('properties','propertiesIndex')->name('front-properties-index');
+    Route::get('properties/selected/{area}','propertySelect')->name('front-properties-selected');
+    Route::get('/home/pricing','pricingIndex')->name('front-pricing-index');
+    
+    Route::get('properties/selected/{name}/{id}','proprtyLotArea')->name('front-proprtyLotArea');
+    Route::get('properties/selected/{name}/{siteid}/{id}','propertiesLotAreaCosting')->name('front-propertiesLotAreaCosting');
+    Route::get('properties/selected/lot/{id}','getPropertyInfo')->name('front-getproperty-info');
 });
+
+Route::controller(PaymentController::class)->group(function () {
+    Route::get('/home/pay','pay')->name('front-pay');
+    Route::get('/home/success','success')->name('front-pay');
+    // Route::get('/home/link-pay','linkPay')->name('link-pay');
+    // Route::get('/home/link-status/{linkid}','linkStatus')->name('link-status');
+    // Route::get('/home/refund','refund')->name('front-refund');
+    // Route::get('/home/refund-status/{id}','refundStatus')->name('front-refund-status-id');
+});
+
+Route::controller(CheckoutController::class)->group(function () {
+    Route::post('/home/checkout','index')->name('xendit_checkout');
+    Route::get('/try-checkout','onSubmit')->name('onSubmit');
+});
+
+// Route::prefix('home')->group(function(){
+//     Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
+
+//         ->controller(CheckoutController::class)->group(function() {
+
+//         Route::post('/checkout','index')->name('xendit_checkout');
+//         Route::get('/try-checkout','onSubmit')->name('onSubmit');
+
+//     });
+// });
+
+
 
 Route::prefix('home/account')->group(function(){
     Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
@@ -69,8 +110,21 @@ Route::prefix('home/account')->group(function(){
 
                 Route::get('my-credential','credential')->name('mycredential');
                 Route::post('my-credential','credential_create')->name('mycredential_create');
+                Route::get('getCredential-accnt/{id}','getCredential')->name('getcredential_accnt');
     });
 });
+
+Route::prefix('home/account')->group(function(){
+    Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
+        ->controller(updateFrontcontroller::class)
+            ->group(function() {
+
+                Route::post('my-credential-update','myCredential')->name('mycredential_update');
+    });
+});
+
+
+
 
 
 
@@ -218,6 +272,14 @@ Route::prefix('mdd-properties/dashboard/jsx/managestaff')->group(function() {
     });
 });
 
+// MANAGE PRICING
+Route::prefix('mdd-properties/dashboard/jsx/managespricing')->group(function() {
+    Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
+        ->controller(pricingcontroller::class)
+            ->group(function() {
+                Route::get('index','index')->name('ms_pricing_index');
+    });
+});
 
 // MANAGE STAFF - PROJECTS
 
@@ -245,9 +307,6 @@ Route::prefix('mdd-properties/dashboard/jsx/managestaff')->group(function() {
                 Route::get('projects-property-id','project_property_site')->name('ms-project-property-id');
                 Route::get('projects-property-lotid','project_propertylot_site')->name('ms-projects-property-lotid');
                 Route::get('projects-property-area-price/{id}','project_property_areaPrice')->name('ms-projects-property-area-price');
-
-
-
 
     });
 });

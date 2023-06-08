@@ -18,12 +18,20 @@ class accountcontroller extends Controller
 
     }
 
-
     public function credential() {
 
         $Client = $this->clientcontroller->client_exist(Auth::user()->id);
 
         return view('mdd.front.mycredential',['Client'=> $Client]);
+    }
+
+    public function getCredential($id) {
+
+        $ClientCreds = client::join('users','clients.user_id','users.id')
+                ->where('clients.id',$id)
+                ->select('clients.id as cid','clients.user_id','clients.fname','clients.lname','clients.mname','clients.address','clients.age','clients.bdate','clients.ifmarried','clients.bplace','clients.religion','clients.nationality','users.email','users.uqid','users.id')->first();
+
+         return response()->json(['status' => 200,'ClientCreds' => $ClientCreds]);
     }
 
     public function credential_create(Request $request) {
@@ -37,9 +45,6 @@ class accountcontroller extends Controller
                     'mname' => 'required',
                     'address' => 'required',
                     'ifmarriege' => 'required',
-                    // 'province' => 'required',
-                    // 'city' => 'required',
-                    // 'barangay' => 'required',
                     'bdate' => 'required',
                     'age' => 'required',
                     'pbirth' => 'required',
@@ -52,9 +57,6 @@ class accountcontroller extends Controller
                     'mname.required' => 'Somthing wrong with input value.',
                     'address.required' => 'Somthing wrong with input value.',
                     'ifmarriege.required' => 'Somthing wrong with input value.',
-                    // 'province.required' => 'Somthing wrong with input value.',
-                    // 'city.required' => 'Somthing wrong with input value.',
-                    // 'barangay.required' => 'Somthing wrong with input value.',
                     'bdate.required' => 'Somthing wrong with input value.',
                     'age.required' => 'Somthing wrong with input value.',
                     'pbirth.required' => 'Somthing wrong with input value.',
@@ -70,9 +72,6 @@ class accountcontroller extends Controller
                 'mname' => $request->mname,
                 'ifmarried' => $request->ifmarriege,
                 'address' => $request->address,
-                // 'province' => $request->province,
-                // 'city' => $request->city,
-                // 'barangay' => $request->barangay,
                 'bdate' => $request->bdate,
                 'age' => $request->age,
                 'bplace' => $request->pbirth,

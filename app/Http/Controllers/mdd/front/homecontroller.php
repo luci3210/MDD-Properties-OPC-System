@@ -11,4 +11,9 @@ class homecontroller extends Controller
         
         return view('mdd.front.home');
     }
+
+     public function aboutUsIndex() {
+        
+        return view('mdd.front.aboutus');
+    }
 }

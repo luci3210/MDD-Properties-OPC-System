@@ -41,46 +41,4 @@
 		</section>
 		<!-- End Error Page -->
 
-		<!-- Download App -->
-		<section class="download-app homec-bg-cover homec-bg-primary-color pd-top-15 pd-btm-15" style="background-image:url('img/download-vector.svg')">
-			<div class="homec-shape">
-				<div class="homec-shape-single homec-shape-11"><img src="img/anim-shape-10.svg" alt="#"></div>
-				<div class="homec-shape-single homec-shape-12"><img src="img/anim-shape-10.svg" alt="#"></div>
-				<div class="homec-shape-single homec-shape-13"><img src="img/anim-shape-10.svg" alt="#"></div>
-			</div>
-			<div class="container">
-				<div class="row">
-					<div class="col-12">
-						<div class="download-app__middle">
-							<div class="download-app__content">
-								<div class="homec-section__head section-white mg-btm-30" data-aos="fade-up" data-aos-delay="400">
-									<h2 class="homec-section__title">Download Our Mobile App</h2>						
-									<p class="sec-head__text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered into the find to amke it  alteration.</p>
-								</div>
-								<!-- App Download Button -->
-								<div class="download__app-button" data-aos="fade-up" data-aos-delay="500">
-									<a href="#" class="homec-btn homec-btn-primary-overlay homec-btn__download">
-										<div class="homec-btn__inside">
-											<i class="fa-brands fa-apple"></i>
-											<div class="btn-content"><span>DOWNLOAD ON THE</span><p>App Store</p></div>
-										</div>
-									</a>
-									<a href="#" class="homec-btn homec-btn-primary-overlay homec-btn__download">
-										<div class="homec-btn__inside">
-											<i class="fa-brands fa-google-play"></i>
-											<div class="btn-content"><span>GET IT ON</span><p>Google Play</p></div>
-										</div>
-									</a>
-								</div>
-								<!-- End App Download Button -->
-							</div>
-							<!-- Download Image -->
-							<div class="download-app__img" data-aos="fade-up" data-aos-delay="700">
-								<img src="https://placehold.co/425x425" alt="#">
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
 @endsection

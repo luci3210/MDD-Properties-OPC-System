@@ -168,37 +168,22 @@
                                         <div class="navbar">
                                             <div class="nav-item">                                      
                                                 <!-- Main Menu -->
-                                                <ul class="nav-menu menu navigation list-none">
-                                                    <li class="menu-item-has-children active"><a href="#">Home</a>
-                                                        <ul class="sub-menu">
-                                                            <li><a href="index.html">Homepage 01</a></li>
-                                                            <li><a href="index-2.html">Homepage 02</a></li>
-                                                            <li><a href="index-3.html">Homepage 03</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="menu-item-has-children"><a href="#">Properties</a>
-                                                        <ul class="sub-menu">
-                                                            <li><a href="property-grid.html">Properties</a></li>
-                                                            <li><a href="property-single.html">Property Single</a></li>
-                                                            <li><a href="add-property.html">Add Property</a></li>
-                                                            <li><a href="dashboard.html">Dashboard</a></li>
-                                                            <li><a href="submit-property.html">Submit Property</a></li>
-                                                            <li><a href="edit-property.html">Edit Property</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="contact-us.html">Pricing</a></li>
-                                                    <li><a href="contact-us.html">Contact Us</a></li>
-                                                     @auth
-                                                    <li class="menu-item-has-children"><a href="#">Account</a>
-                                                        <ul class="sub-menu">
-                                                            <li><a href="{{ route('mycredential') }}">My Credential</a></li>
-                                                            <li><a href="about.html">My Property</a></li>
-                                                            <li><a href="about.html">My Payment</a></li>
-                                                        </ul>
-                                                    </li>
-                                                     @endauth
-                                                   
-                                                </ul>
+<ul class="nav-menu menu navigation list-none">
+    <li><a href="{{ route('homes') }}">Home</a></li>
+    <li><a href="{{ route('front-properties-index') }}">Properties</a></li>
+    <li><a href="{{ route('front-pricing-index') }}">Pricing</a></li>
+    <li><a href="{{ route('front-aboutus-index') }}">About Us</a></li>
+     @auth
+    <li class="menu-item-has-children"><a href="#">Account</a>
+        <ul class="sub-menu">
+            <li><a href="{{ route('mycredential') }}">My Credential</a></li>
+            <li><a href="#">My Property</a></li>
+            <li><a href="#">My Payment</a></li>
+        </ul>
+    </li>
+     @endauth
+   
+</ul>
                                                 <!-- End Main Menu -->
                                             </div>
                                         </div>

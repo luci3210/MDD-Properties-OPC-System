@@ -30,6 +30,8 @@ class iocontroller extends Controller
 
     public function login(Request $request) {
 
+        // return Auth::user()->id;
+
         $page = "Login";
         return view('mdd.front.login',['pageName'=> $page]);
 
@@ -37,17 +39,29 @@ class iocontroller extends Controller
 
     public function login_attemp(Request $request) {
 
-         $credentials = $request->validate([
+        $credentials = $request->validate([
             'email' => 'required|email',
                 'password' => 'required',
             ]);
 
+
+            $statusVerify = User::where([['email',$request->email],['email_verified_at', null]])->first();
+
+            if($statusVerify) {
+
+                return back()->with('message','Please check your e-mail and verify!');
+
+                } 
+
             if (Auth::attempt($credentials)) {
+
                 $request->session()->regenerate();
                 return redirect()->intended('/home');
-            }
 
-            return response()->json(['message' => 'Invalid login credentials'], 401);
+                }
+
+        return back()->with('message','Invalid login credentials!! ');
+
     }
 
     public function register_submit(Request $request) {
@@ -138,7 +152,7 @@ class iocontroller extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return response()->json(['message' => 'Logged out']);
+        return redirect('home');
     }
 
 }

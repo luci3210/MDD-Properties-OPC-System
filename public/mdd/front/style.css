@@ -2183,21 +2183,21 @@ input[type="checkbox"] {
 	line-height: initial;
 	background: #E8E7FD;
 	padding: 12px 25px;
-	font-weight: 500;
-	font-size: 18px;
-	font-size: 64px;
 	font-weight: 700;
+/*	font-size: 18px;*/
+	font-size: 35px;
+/*	font-weight: 400;*/
 	border-radius: 4px;
 }
 .homec-psingle__amount span {
 	font-weight: 400;
-	font-size: 18px;
+	font-size: 14px;
 	line-height: initial;
 }
 .homec-psingle__amount span.homec-psingle__currency {
-	top: -25px;
+	top: -10px;
 	position: relative;
-	font-size: 28px;
+	font-size: 20px;
 	font-weight: 700;
 }
 

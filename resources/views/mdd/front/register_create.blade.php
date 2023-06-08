@@ -74,7 +74,7 @@
     <!-- Form Group -->
     <div class="form-group mg-top-20">
         <div class="ecom-wc__bottom">
-            <p class="ecom-wc__text">Already have Account? <a href="login.html">Log In</a></p>
+            <p class="ecom-wc__text">Already have Account? <a href="{{ route('iologin') }}">Log In</a></p>
         </div>
     </div>
 </form>	
@@ -101,13 +101,6 @@
 										<li><a href="#">Privacy Policy</a></li>
 										<li><a href="#">Help</a></li>
 									</ul>
-									<div class="ecom-wc__footer--languages">
-										<select class="ecom-wc__footer--language">
-											<option data-display="english">English</option>
-											<option value="2">Bengali</option>
-											<option value="3">Frances</option>
-										</select>
-									</div>
 								</div>
 								<p class="ecom-wc__footer--text">@ 2023 MDD Properties. All Right Reserved. </p>
 							</div>

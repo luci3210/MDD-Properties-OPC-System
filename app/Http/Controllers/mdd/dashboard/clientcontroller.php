@@ -18,7 +18,9 @@ class clientcontroller extends Controller
 
     public function client_exist($id) {
 
-        return client::join('users','clients.user_id','users.id')->where('user_id',$id)->select('clients.*','users.*')->first();
+        return client::join('users','clients.user_id','users.id')->where('user_id',$id)
+            ->select('clients.id as cid','clients.fname','clients.lname','clients.mname','clients.address','clients.age','clients.bdate','users.email','users.uqid')
+                ->first();
     }
 
     public function client_id($id) {

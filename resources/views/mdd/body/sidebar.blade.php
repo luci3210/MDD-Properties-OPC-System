@@ -154,10 +154,17 @@
                     <span class="nk-menu-text">Costing</span>
             </a>
         </li>
+
         <li class="nk-menu-item">
             <a href="{{ route('ms-location') }}" class="nk-menu-link"> 
                 <em class="icon ni ni-chevron-right"></em>
                 <span class="nk-menu-text">Location</span>
+            </a>
+        </li>
+        <li class="nk-menu-item">
+            <a href="{{ route('ms_pricing_index') }}" class="nk-menu-link">
+                <em class="icon ni ni-chevron-right"></em>
+                    <span class="nk-menu-text">Pricing</span>
             </a>
         </li>
         <li class="nk-menu-item">

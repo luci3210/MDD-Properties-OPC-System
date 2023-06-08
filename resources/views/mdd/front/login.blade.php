@@ -11,12 +11,12 @@
                                 
     <h3 class="ecom-wc__form-title ecom-wc__form-title__one">Login 
 
-        @if ($message = Session::get('success'))
-        <span class="text-success"><strong> Success : </strong> {{ $message }} </span>
+        @if ($message = Session::get('message'))
+        <span class="text-danger"><strong> Whoops! </strong> {{ $message }} </span>
         @endif 
 
         @if ($errors->any())
-        <span class="text-success"><strong>Whoops!</strong>  There were some problems with your input. </span>
+        <span class="text-danger"><strong>Whoops!</strong>  There were some problems with your input. </span>
         @endif
 
 
@@ -28,18 +28,16 @@
         @csrf
         <input type="hidden" name="url" value="{{ session('url.intended') }}">
         <div class="form-group homec-form-input">
-            <label class="ecom-wc__form-label mg-btm-10">E-mail*</label>
-            <span id="e_mail-error" class="error"></span>
+            <label class="ecom-wc__form-label mg-btm-10">E-mail* <span id="err_email" class="error"></span></label>
             <div class="form-group__input">
-                <input class="ecom-wc__form-input" type="email" name="email" id="e_mail">
+                <input class="ecom-wc__form-input" type="email" name="email" id="email">
             </div>
         </div>
         <!-- Form Group -->
         <div class="form-group homec-form-input">
-            <label class="ecom-wc__form-label mg-btm-10">Confirm Password*</label>
-            <span id="confirmpass-error" class="error"></span>
+            <label class="ecom-wc__form-label mg-btm-10">Confirm Password* <span id="err_password" class="error"></span></label>
             <div class="form-group__input">
-                <input class="ecom-wc__form-input" id="confirmpass" type="password" name="password">
+                <input class="ecom-wc__form-input" id="password" type="password" name="password">
             </div>
         </div>
         <!-- Form Group -->
@@ -79,13 +77,6 @@
                                         <li><a href="#">Privacy Policy</a></li>
                                         <li><a href="#">Help</a></li>
                                     </ul>
-                                    <div class="ecom-wc__footer--languages">
-                                        <select class="ecom-wc__footer--language">
-                                            <option data-display="english">English</option>
-                                            <option value="2">Bengali</option>
-                                            <option value="3">Frances</option>
-                                        </select>
-                                    </div>
                                 </div>
                                 <p class="ecom-wc__footer--text">@ 2023 MDD Properties. All Right Reserved. </p>
                             </div>
@@ -97,39 +88,59 @@
 
 <script>
 
-$(document).ready(function() {
+document.getElementById('LoginForm').addEventListener('submit', function(e) {
+  e.preventDefault(); 
 
-    var ValidateMyInput = {
-          
-       e_mail: {
-        required: true
-      },
+  var the_email = document.getElementById('email');
+  var the_password = document.getElementById('password');
 
-           confirmpass: {
-            required: true
-          }
+    err_email.textContent = '';
+    err_password.textContent = '';
 
-  };
+    var email = the_email.value.trim();
+    var password = the_password.value.trim();
 
-    var ValidateMyMessage = {
-      e_mail: {
-        required: "E-mail is required.",
-      },
-      confirmpass: {
-        required: "Password is required.",
-      }
-    };
+  if (email === '') {
+    showError(the_email, err_email, 'E-mail is required.');
+  }
 
-    $('#LoginForm').validate({
-        rules: ValidateMyInput,
-        messages: ValidateMyMessage,
-        errorElement: 'span',
-        errorPlacement: function(error, element) {
-            error.appendTo($('#' + element.attr('id') + '-error'));
-        }
-    });
+  if (password === '') {
+    showError(the_password, err_password, 'Password is required.');
+  } 
 
-  });
+  if (!err_email.textContent && !err_password.textContent) {
+    submitForm();
+  }
+
+});
+
+function submitForm() {
+  var form = document.getElementById('LoginForm');
+  form.submit();
+}
+
+function showError(input, errorElement, errorMessage) {
+  errorElement.textContent = errorMessage;
+  input.classList.add('error-input');
+}
+
+
+document.getElementById('email').addEventListener('input', function() {
+  clearError(this, document.getElementById('err_email'));
+});
+
+document.getElementById('password').addEventListener('input', function() {
+  clearError(this, document.getElementById('err_password'));
+});
+
+function clearError(input, errorElement) {
+  if (input.classList.contains('error-input')) {
+    input.classList.remove('error-input');
+    errorElement.textContent = '';
+  }
+}
+
+
 
 </script>
 

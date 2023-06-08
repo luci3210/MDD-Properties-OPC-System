@@ -7,14 +7,17 @@
     "require": {
         "php": "^8.1",
         "guzzlehttp/guzzle": "^7.2",
+        "ixudra/curl": "^6.22",
         "laravel/framework": "^10.0",
         "laravel/jetstream": "^3.1",
         "laravel/passport": "^11.8",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^2.11",
+        "paymongo/paymongo-php": "^0.0.0",
         "power-components/livewire-powergrid": "^3.7",
         "wire-elements/modal": "^1.0",
+        "xendit/xendit-php": "^2.19",
         "yajra/laravel-datatables-oracle": "^10.3.1"
     },
     "require-dev": {

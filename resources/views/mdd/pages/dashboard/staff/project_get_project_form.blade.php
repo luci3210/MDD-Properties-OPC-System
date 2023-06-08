@@ -214,12 +214,60 @@
 
 
 
+<hr>
+
+
+<div class="card card-bordered">
+<div class="card-inner">
+    <div class="card-head">
+        <h5 class="card-title">Default Pricing Setting</h5>
+    </div>
+
+    <div class="formOuterRow">
+    <div class="row g-4 formInnerRow" style="margin-bottom:15px;">
+
+    
+
+<div class="col-lg-2">
+    <div class="form-group">
+        <div class="form-control-wrap">
+            <input type="text" value="" class="form-control form-control-outlined" name="the_1stp" id="the_1stp">
+            <label class="form-label-outlined" for="outlined-default">1st Price (Enten No, Month)</label>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-2">
+    <div class="form-group">
+        <div class="form-control-wrap">
+            <input type="text" value="" class="form-control form-control-outlined" name="the_2ndp" id="the_2ndp">
+            <label class="form-label-outlined" for="outlined-default">2nd Price (Enten No, Month)</label>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-2">
+    <div class="form-group">
+        <div class="form-control-wrap">
+            <input type="text" class="form-control form-control-outlined" value="" name="the_3rdp" id="the_3rdp">
+            <label class="form-label-outlined" for="outlined-default">3rd Price (Enten No, Month)</label>
+        </div>
+    </div>
+</div>
 
 
 
 
+
+
+    </div>
+    </div>
+</div>
+</div>
 
 <hr>
+
+
 <div class="card card-bordered">
 <div class="card-inner">
     <div class="card-head">

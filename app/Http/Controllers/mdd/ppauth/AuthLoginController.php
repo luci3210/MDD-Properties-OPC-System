@@ -31,7 +31,7 @@ class AuthLoginController extends Controller
             ]
         );
 
-        $email = User::where('email',$request->email)->first();
+        $email = User::where([['email',$request->email],['department',100],['status',1]])->first();
 
         if($email) {
 
